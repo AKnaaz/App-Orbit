@@ -1,8 +1,24 @@
 import React from 'react';
-import bgImage from '../../../assets/login.png'; // পেছনের image এখানে দাও
+import bgImage from '../../../assets/lo.jpg';
 import { Link } from 'react-router';
+import SocialLogin from '../SocialLogin/SocialLogin';
+import { useForm } from 'react-hook-form';
+import useAuth from '../../../hooks/useAuth';
 
 const Login = () => {
+
+  const { register, handleSubmit, formState: {errors}} = useForm();
+  const {signIn} = useAuth();
+
+  const onSubmit = data => {
+    signIn(data.email, data.password)
+        .then(result => {
+            console.log(result.user)
+            // navigate(from)
+        })
+        .catch(error => console.log(error))
+  }
+
   return (
     <div
       className="min-h-screen flex items-center justify-center px-4 py-10 bg-cover bg-center"
@@ -17,29 +33,60 @@ const Login = () => {
              WebkitBackdropFilter: 'blur(10px)',
              border: '1px solid rgba(255, 255, 255, 0.2)'
            }}>
-        <h2 className="text-3xl font-bold text-center text-white mb-6">
+        <h2 className="text-3xl font-bold text-center text-purple-700 mb-6">
           Login to AppOrbit
         </h2>
 
-        <form className="space-y-5">
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
           <div>
-            <label className="block text-sm font-medium text-white mb-1">Email</label>
+            <label className="block text-sm font-medium text-purple-700 mb-1">Email</label>
             <input
               type="email"
-              className="w-full px-4 py-2 rounded-md bg-white bg-opacity-70 text-black placeholder:text-gray-700 focus:outline-none focus:ring-2 focus:ring-red-400"
+              {...register('email', {
+                required: true
+              })}
+              className="w-full px-4 py-2 rounded-md bg-white bg-opacity-70 text-black placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-400"
               placeholder="Enter your email"
               required
             />
+            {
+                errors.email?.type === "required" && <p className='text-red-500'>Email is required</p>
+            }
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-white mb-1">Password</label>
+            <label className="block text-sm font-medium text-purple-700
+             mb-1">Password</label>
             <input
               type="password"
-              className="w-full px-4 py-2 rounded-md bg-white bg-opacity-70 text-black placeholder:text-gray-700 focus:outline-none focus:ring-2 focus:ring-red-400"
+              {...register('password' , {
+                required: true, 
+                minLength: 6,
+                pattern: {
+                  value: /^(?=.*[a-z])(?=.*[A-Z]).+$/,
+                  message: "Password must contain at least one uppercase and one lowercase letter"
+                }
+              })}
+              className="w-full px-4 py-2 rounded-md bg-white bg-opacity-70 text-black placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-400"
               placeholder="Enter your password"
               required
             />
+            {
+              errors.password?.type === "required" && (
+                <p className='text-red-500'>Password is required</p>
+              )
+            }
+            {
+              errors.password?.type === "minLength" && (
+                <p className='text-red-500'>Password must be 6 characters or longer</p>
+              )
+            }
+            {
+              errors.password?.type === "pattern" && (
+                <p className='text-red-500'>{errors.password.message}</p>
+              )
+            }
+            <div className='mt-1'><a className="link link-hover text-purple-700">Forgot password?</a></div>
           </div>
 
           <button
@@ -48,16 +95,17 @@ const Login = () => {
           >
             Login
           </button>
-        </form>
 
-        <p className="text-sm text-center text-white mt-4">
-          Don't have an account?{' '}
-          <Link to="/register">
-           <span className="text-purple-500 font-semibold cursor-pointer hover:underline">
-            Register here
-          </span>
-          </Link>
-        </p>
+           <p className="text-sm text-center text-white mt-4">
+            Don't have an account?{' '}
+            <Link to="/register">
+            <span className="text-purple-600 font-semibold cursor-pointer hover:underline">
+              Register here
+            </span>
+            </Link>
+          </p>
+        </form>
+        <SocialLogin></SocialLogin>
       </div>
     </div>
   );
