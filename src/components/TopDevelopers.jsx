@@ -43,7 +43,7 @@ const developers = [
 
 const TopDevelopers = () => {
   return (
-    <div className="py-16 px-4 md:px-10 lg:px-20 bg-gradient-to-b from-[#0B1120] via-[#1E1B4B] to-[#3B0764] text-white text-center">
+    <div className="pt-50 py-16 px-4 md:px-10 lg:px-20 bg-gradient-to-b from-[#0B1120] via-[#1E1B4B] to-[#3B0764] text-white text-center">
       <h2 className="text-3xl md:text-4xl font-bold mb-10">Top Developers</h2>
 
       <Carousel
