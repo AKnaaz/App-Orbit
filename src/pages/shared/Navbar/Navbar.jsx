@@ -14,7 +14,9 @@ const Navbar = () => {
     );
 
     const handleLogout = () => {
-        logOut().catch(error => console.log(error));
+        logOut()
+        .then(res => console.log(res))
+        .catch(error => console.log(error));
     };
 
     return (
@@ -33,7 +35,7 @@ const Navbar = () => {
                 <NavLink to="/">
                     <div className="flex items-center gap-1">
                         <img className="w-8 rounded-full" src={logo} alt="Logo" />
-                        <span className="text-2xl font-bold text-purple-500">AppOrbit</span>
+                        <span className="font text-2xl font-bold text-purple-500">AppOrbit</span>
                     </div>
                 </NavLink>
             </div>

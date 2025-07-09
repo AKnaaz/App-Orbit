@@ -1,22 +1,41 @@
 import React from 'react';
-import bgImage from '../../../assets/lo.jpg';
-import { Link } from 'react-router';
+import bgImage from '../../../assets/login.jpg';
+import { Link, useLocation, useNavigate } from 'react-router';
 import SocialLogin from '../SocialLogin/SocialLogin';
 import { useForm } from 'react-hook-form';
 import useAuth from '../../../hooks/useAuth';
+import Swal from 'sweetalert2';
 
 const Login = () => {
 
   const { register, handleSubmit, formState: {errors}} = useForm();
   const {signIn} = useAuth();
+  const location = useLocation();
+  const navigate = useNavigate();
+  const from = location.state?.from || "/";
 
   const onSubmit = data => {
     signIn(data.email, data.password)
         .then(result => {
             console.log(result.user)
-            // navigate(from)
+            Swal.fire({
+              icon: 'success',
+              title: 'Login Successful',
+              text: 'Welcome back!',
+              timer: 2000,
+              showConfirmButton: false
+            });
+            navigate(from);
         })
-        .catch(error => console.log(error))
+        .catch(error => {
+          console.log(error)
+          Swal.fire({
+            icon: 'error',
+            title: 'Login Failed',
+            text: 'Invalid email or password!',
+            confirmButtonColor: '#d33'
+          });
+        });
   }
 
   return (
