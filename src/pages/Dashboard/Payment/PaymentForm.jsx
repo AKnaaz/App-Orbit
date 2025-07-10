@@ -1,107 +1,106 @@
-import React, { useState } from 'react';
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
-import useAuth from '../../../hooks/useAuth';
+import { useQuery } from '@tanstack/react-query';
+import React, { useState } from 'react';
+import { useParams } from 'react-router';
 import useAxiosSecure from '../../../hooks/useAxiosSecure';
-import Swal from 'sweetalert2';
-import { useNavigate } from 'react-router';
+import Loading from '../../shared/Loading/Loading';
 
 const PaymentForm = () => {
   const stripe = useStripe();
   const elements = useElements();
-  const { user } = useAuth();
-  const axiosSecure = useAxiosSecure();
-  const navigate = useNavigate();
-
+  const { email } = useParams();
+  console.log(email)
   const [error, setError] = useState('');
-  const [processing, setProcessing] = useState(false);
+  const axiosSecure = useAxiosSecure();
 
-  const amount = 9.99; // USD
-  const amountInCents = Math.round(amount * 100);
+  const { isPending, data: userInfo = {} } = useQuery({
+    queryKey: ['user', email],
+    queryFn: async() => {
+      const res = await axiosSecure.get(`/user/${email}`);
+      return res.data;
+    }
+  })
 
-  const handleSubmit = async (e) => {
+  if(isPending) {
+    return <Loading></Loading>
+  }
+
+  console.log("help",userInfo)
+  const amount = 9.99;
+  const amountInCents = amount * 100;
+  console.log(amountInCents)
+
+  const handleSubmit = async(e) => {
     e.preventDefault();
-
-    if (!stripe || !elements) return;
-
-    const card = elements.getElement(CardElement);
-    if (!card) return;
-
-    const { error: cardError } = await stripe.createPaymentMethod({
-      type: 'card',
-      card,
-    });
-
-    if (cardError) {
-      setError(cardError.message);
+    if(!stripe || !elements) {
       return;
-    } else {
-      setError('');
     }
 
-    setProcessing(true);
+    const card = elements.getElement(CardElement);
 
-    // Step 1: Create PaymentIntent
-    const res = await axiosSecure.post('/create-subscription-payment-intent', {
-      amount: amountInCents,
-      email: user.email,
-      name: user.displayName,
+    if(!card) {
+      return;
+    }
+
+    const {error, paymentMethod} = await stripe.createPaymentMethod({
+      type: 'card',
+      card
     });
+
+    if(error) {
+      setError(error.message);
+    }
+    else {
+      setError('');
+      console.log("Payment Method", paymentMethod);
+    }
+
+    const res = await axiosSecure.post('/create-payment-intent', {
+      amountInCents,
+      email
+    })
+    console.log("intent", res)
 
     const clientSecret = res.data.clientSecret;
 
-    // Step 2: Confirm Payment
     const result = await stripe.confirmCardPayment(clientSecret, {
       payment_method: {
-        card,
+        card: elements.getElement(CardElement),
         billing_details: {
-          name: user.displayName,
-          email: user.email,
-        },
-      },
+          name: 'Nazat Akter'
+        }
+      }
     });
 
-    if (result.error) {
-      setError(result.error.message);
-      setProcessing(false);
+    if(result.error){
+      console.log(result.error.message)
     } else {
-      if (result.paymentIntent.status === 'succeeded') {
-        setError('');
-        setProcessing(false);
-
-        // Optional: Store subscription status in your DB
-        await axiosSecure.post('/membership/confirm', {
-          email: user.email,
-          transactionId: result.paymentIntent.id,
-          amount,
-        });
-
-        Swal.fire({
-          title: 'Subscribed!',
-          text: 'Your membership is now active.',
-          icon: 'success',
-          confirmButtonText: 'Go to Profile',
-        }).then(() => {
-          navigate('/dashboard/profile');
-        });
+      if(result.paymentIntent.status === 'succeeded') {
+        console.log("Payment Successed!")
+        console.log(result)
       }
     }
-  };
+  }
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="space-y-4 bg-white p-6 rounded-xl shadow-md w-full max-w-md mx-auto"
-    >
-      <CardElement className="p-2 border rounded" />
-      <button
-        className="btn bg-lime-500 hover:bg-lime-600 text-white w-full"
-        type="submit"
-        disabled={!stripe || processing}
+    <div>
+      <form onSubmit={handleSubmit}
+      className='space-y-4 bg-white p-6 rounded-xl shadow-md w-full max-w-md mx-auto'
       >
-        {processing ? 'Processing...' : `Subscribe for $${amount}`}
-      </button>
-      {error && <p className="text-red-500">{error}</p>}
-    </form>
+        <CardElement className='p-2 border rounded'>
+        </CardElement>
+
+        <button
+         type='submit'
+         className='btn btn-primary w-full'
+         disabled={!stripe}>
+          Pay ${amount} For Subscription 
+        </button>
+        {
+          error && <p className='text-red-500'>{error}</p>
+        }
+      </form>
+    </div>
   );
 };
 

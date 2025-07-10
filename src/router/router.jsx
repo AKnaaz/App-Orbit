@@ -45,7 +45,7 @@ export const router = createBrowserRouter([
         </PrivateRoute>
       },
       {
-        path: "payment",
+        path: "payment/:email",
         element: <PrivateRoute>
           <Payment></Payment>
         </PrivateRoute>

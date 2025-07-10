@@ -1,45 +1,37 @@
-import React, { useState } from 'react';
+import React from 'react';
 import useAuth from '../../../hooks/useAuth';
-import { FaCheckCircle, FaUserCircle } from 'react-icons/fa';
+import { FaUserCircle } from 'react-icons/fa';
 import { IoMail } from 'react-icons/io5';
 import { AiOutlineCrown } from 'react-icons/ai';
-import profileBg from '../../../assets/bridge.jpg'; // তোমার পছন্দের bg
-import useSubscription from '../../../hooks/useSubscription';
-import axios from 'axios';
+import profileBg from '../../../assets/bridge.jpg';
 import { useNavigate } from 'react-router';
+import useAxiosSecure from '../../../hooks/useAxiosSecure';
 
 const MyProfile = () => {
   const { user } = useAuth();
   console.log("come bhai",user)
-  const { isSubscribed } = useSubscription(); // return true/false
+  const axiosSecure = useAxiosSecure();
+  const navigate = useNavigate();
   const subscriptionPrice = '$9.99';
 
-//   const [loading, setLoading] = useState(false);
-  const [subscribedLocally, setSubscribedLocally] = useState(false);
 
-  const navigate = useNavigate();
+  const handleSubscribe = async(email) => {
+     try {
+      const userInfo = {
+        name: user.displayName,
+        email: user.email,
+        photo: user.photoURL,
+        isSubscribed: false, 
+      };
 
-  const handleSubscribeClick = async () => {
-    // setSubscribedLocally(true);
-    // এখানে তুমি রিডাইরেক্ট বা মডাল খুলতেও পারো
-    // try {
-    //   setLoading(true);
-    //   const response = await axios.post('http://localhost:3000/api/payment/create-checkout-session', {
-    //     email: user?.email,
-    //     userId: user?.uid,
-    //   });
-    //   if (response.data.url) {
-    //     window.location.href = response.data.url; // Stripe Checkout এ রিডাইরেক্ট
-    //   }
-    // } catch (error) {
-    //   console.error('Subscription error:', error);
-    //   setLoading(false);
-    // }
-    navigate('/dashboard/payment');
+      const res = await axiosSecure.post('/user', userInfo); 
+      console.log(res.data);
 
+      navigate(`/dashboard/payment/${email}`);
+    } catch (error) {
+      console.error('Error subscribing user:', error);
+    }
   };
-
-  const showVerified = isSubscribed || subscribedLocally;
 
   return (
     <div
@@ -68,50 +60,13 @@ const MyProfile = () => {
           <IoMail className="text-white" />
           {user?.email}
         </p>
-
-        {showVerified ? (
-          <div className="mt-6 flex items-center justify-center gap-2 bg-green-600 px-4 py-2 rounded-full text-white font-semibold mx-auto w-max">
-            <FaCheckCircle />
-            Status: Verified
-          </div>
-        ) : (
-          <button
-            onClick={handleSubscribeClick}
+        <button
+            onClick={() => handleSubscribe(user.email)}
             className="mt-6 btn btn-wide bg-gradient-to-r from-gray-700 to-gray-500 text-white font-bold rounded-3xl"
-            // disabled={loading}
           >
             <AiOutlineCrown className="text-xl mr-1" />
-            {/* {loading ? 'Redirecting...' : `Subscribe for ${subscriptionPrice}`} */}
             Subscribe for {subscriptionPrice}
-          </button>
-        )}
-
-        {/* {
-          isSubscribed ? (
-            <div className="mt-6 flex items-center justify-center gap-2 text-green-400 font-semibold text-lg">
-              <FaCheckCircle />
-              Status: Verified
-            </div>
-          ) : (
-            <button
-              className="mt-6 btn btn-wide bg-gradient-to-r from-gray-700 to-gray-500 text-white font-bold rounded-3xl"
-            >
-              <AiOutlineCrown className="text-xl mr-1" />
-              Subscribe for {subscriptionPrice}
-            </button>
-          )
-        } */}
-
-        {/* {
-            !isSubscribed && (
-                <button
-                    className="mt-6 btn btn-wide bg-gradient-to-r from-gray-700 to-gray-500 text-white font-bold rounded-3xl"
-                    >
-                    <AiOutlineCrown className="text-xl mr-1" />
-                    Subscribe for {subscriptionPrice}
-                </button>
-            )
-        } */}
+        </button>
       </div>
     </div>
   );

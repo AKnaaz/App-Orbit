@@ -5,6 +5,7 @@ import { WithContext as ReactTags } from 'react-tag-input';
 import { useForm } from 'react-hook-form';
 import Swal from 'sweetalert2';
 import useAxiosSecure from '../../../hooks/useAxiosSecure';
+import { useNavigate } from 'react-router';
 
 const KeyCodes = {
   comma: 188,
@@ -19,6 +20,7 @@ const AddProduct = () => {
     const axiosSecure = useAxiosSecure();
     const [tags, setTags] = useState([]);
     const { register, handleSubmit, formState: { errors }, reset  } = useForm();
+    const navigate = useNavigate();
 
     const handleDelete = i => {
     setTags(tags.filter((tag, index) => index !== i));
@@ -52,6 +54,7 @@ const AddProduct = () => {
                 });
                 reset();
                 }
+            navigate("/dashboard/my-products");    
         });
     };
 
