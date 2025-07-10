@@ -51,7 +51,7 @@ const testimonialsBottom = [
 const CommunityTestimonials = () => {
   return (
     <div className="mb-5 py-16 px-4 md:px-10 lg:px-20 bg-gradient-to-b from-[#0B1120] via-[#1E1B4B] to-[#3B0764] text-white text-center">
-      <h2 className="text-3xl font-bold text-center mb-10">💬 Community Testimonials</h2>
+      <h2 className="text-3xl font-bold text-center mb-10">Community Testimonials</h2>
 
       {/* Top Marquee */}
       <Marquee speed={40} pauseOnHover gradient={false} className="mb-6">
