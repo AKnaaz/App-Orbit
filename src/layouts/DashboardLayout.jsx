@@ -48,12 +48,12 @@ const DashboardLayout = () => {
                     My Profile</NavLink></li>
 
                 <li className='font-bold'>
-                    <NavLink to="/dashboard/addProduct">
+                    <NavLink to="/dashboard/add-product">
                     <MdAddBox className="inline" size={20}/>
                     Add Product</NavLink></li>
 
                 <li className='font-bold'>
-                    <NavLink to="/dashboard/myProducts">
+                    <NavLink to="/dashboard/my-products">
                     <MdInventory2 className="inline" size={20}/>
                     My Products</NavLink></li>
 
