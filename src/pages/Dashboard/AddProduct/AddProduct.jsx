@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import useAuth from '../../../hooks/useAuth';
 import addBg from '../../../assets/add.webp';
 import { WithContext as ReactTags } from 'react-tag-input';
-import { div } from 'framer-motion/client';
+import { useForm } from 'react-hook-form';
 
 const KeyCodes = {
   comma: 188,
@@ -15,6 +15,7 @@ const AddProduct = () => {
     const { user } = useAuth();
     console.log("plz",user)
     const [tags, setTags] = useState([]);
+    const { register, handleSubmit, formState: { errors }  } = useForm();
 
     const handleDelete = i => {
     setTags(tags.filter((tag, index) => index !== i));
@@ -22,6 +23,18 @@ const AddProduct = () => {
 
     const handleAddition = tag => {
         setTags([...tags, tag]);
+    };
+
+    const onSubmit = data => {
+        const fullData = {
+        ...data,
+        tags: tags.map(t => t.text),
+        ownerName: user?.displayName,
+        ownerEmail: user?.email,
+        ownerImage: user?.photoURL,
+        createdAt: new Date()
+        };
+        console.log('Final Submit Data:', fullData);
     };
 
     return (
@@ -33,13 +46,14 @@ const AddProduct = () => {
         className="w-full max-w-3xl p-8 rounded-2xl shadow-2xl"
       >
         <h2 className="text-3xl font-bold text-center mb-6 text-white">Add a Product</h2>
-        <form className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <form onSubmit={handleSubmit(onSubmit)}  className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* Product Name */}
           <div className="form-control col-span-2">
             <label className="label">
               <span className="label-text text-white">Product Name</span>
             </label>
-            <input type="text" placeholder="Enter product name" className="input input-bordered w-full bg-transparent" required />
+            <input  {...register("productName", { required: true })} type="text" placeholder="Enter product name" className="input input-bordered w-full bg-transparent" required />
+            {errors.productName && <p className="text-red-500">{errors.productName.message}</p>}
           </div>
 
           {/* Product Image */}
@@ -47,7 +61,8 @@ const AddProduct = () => {
             <label className="label">
               <span className="label-text text-white">Product Image URL</span>
             </label>
-            <input type="text" placeholder="Enter image URL" className="input input-bordered w-full bg-transparent" required />
+            <input {...register("productImage", { required: true })} type="text" placeholder="Enter image URL" className="input input-bordered w-full bg-transparent" required />
+            {errors.productImage && <p className="text-red-500">{errors.productImage.message}</p>}
           </div>
 
           {/* Description */}
@@ -55,7 +70,8 @@ const AddProduct = () => {
             <label className="label">
               <span className="label-text text-white">Description</span>
             </label>
-            <textarea className="textarea textarea-bordered w-full bg-transparent" placeholder="Write about your product..." required />
+            <textarea {...register("description", { required: true })} className="textarea textarea-bordered w-full bg-transparent" placeholder="Write about your product..." required />
+            {errors.description && <p className="text-red-500">{errors.description.message}</p>}
           </div>
 
           {/* Owner Info (Read-only) */}
@@ -113,7 +129,8 @@ const AddProduct = () => {
             <label className="label">
               <span className="label-text text-white">External Link</span>
             </label>
-            <input type="url" placeholder="https://yourproduct.com" className="input input-bordered w-full bg-transparent" />
+            <input {...register("externalLink")} type="url" placeholder="https://yourproduct.com" className="input input-bordered w-full bg-transparent" />
+            {errors.externalLink && <p className="text-red-500">{errors.externalLink.message}</p>}
           </div>
 
           {/* Submit Button */}
