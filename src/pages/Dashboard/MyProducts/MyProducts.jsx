@@ -3,11 +3,12 @@ import React from 'react';
 import useAuth from '../../../hooks/useAuth';
 import useAxiosSecure from '../../../hooks/useAxiosSecure';
 import { FaEdit, FaTrash } from 'react-icons/fa';
+import Swal from 'sweetalert2';
 
 const MyProducts = () => {
     const { user } = useAuth();
     const axiosSecure = useAxiosSecure();
-    const { data: products=[] } = useQuery({
+    const { data: products=[], refetch } = useQuery({
         queryKey: ['my-product', user.email],
         queryFn: async() => {
             const res = await axiosSecure.get(`/products?email=${user.email}`);
@@ -16,6 +17,36 @@ const MyProducts = () => {
     });
     console.log(products)
 
+    const handleDelete = async (id) => {
+        const result = await Swal.fire({
+                title: 'Are you sure?',
+                text: 'Do you want to delete this product?',
+                icon: 'warning',
+                showCancelButton: true,                        confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Yes, delete it!'
+                });
+                if(result.isConfirmed){
+                    try {
+                        axiosSecure.delete(`/products/${id}`)
+                        .then(res => {
+                        console.log(res.data)
+                        if(res.data.deletedCount){
+                            Swal.fire({
+                                title: "Deleted!",
+                                text: "Product has been deleted",
+                                icon: "success",
+                                timer: 1500,
+                                showConfirmButton: false
+                            });
+                        }
+                        refetch();
+                    });
+                } catch (err) {
+                    Swal.fire("Error", err.message || "Failed to delete product", "error")
+                };
+            } 
+    }
     return (
         <div className="w-full overflow-x-auto rounded-xl border border-[#423d92] shadow-md">
             <table className="min-w-full text-sm text-left">
@@ -39,7 +70,7 @@ const MyProducts = () => {
                         <button className="btn bg-[#292466] text-white rounded transition-all duration-200">
                         <FaEdit /> Update
                         </button>
-                        <button className="btn bg-[#292466] text-white rounded transition-all duration-200">
+                        <button onClick={() => handleDelete(product._id)} className="btn bg-[#292466] text-white rounded transition-all duration-200">
                         <FaTrash /> Delete
                         </button>
                     </td>
