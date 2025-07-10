@@ -27,11 +27,11 @@ const Banner = () => {
         </p>
         <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
           <Link to="/products">
-            <button className="bg-[#6366F1] hover:bg-[#4F46E5] px-6 py-3 rounded-lg font-semibold">
+            <button className="bg-gradient-to-r from-blue-900 to-purple-800 px-6 py-3 rounded-lg font-semibold">
               Explore Now
             </button>
           </Link>
-          <button className="border border-white hover:bg-white hover:text-black px-6 py-3 rounded-lg font-semibold">
+          <button className="border border-purple-800 text-purple-800 hover:bg-purple-800 hover:text-white px-6 py-3 rounded-lg font-semibold">
             Add Your Product
           </button>
         </div>

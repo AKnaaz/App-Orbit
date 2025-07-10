@@ -58,12 +58,12 @@ const CommunityTestimonials = () => {
         {testimonialsTop.map((t, index) => (
           <div
             key={index}
-            className="bg-purple-200 mx-4 p-6 rounded-lg min-w-[270px] shadow-md flex flex-col items-center text-center"
+            className="mx-4 p-6 rounded-lg min-w-[270px] shadow-2xl flex flex-col items-center text-center border border-purple-800"
           >
             <img
               src={t.img}
               alt={t.name}
-              className="w-16 h-16 rounded-full object-cover mb-3 border-2 border-pink-400"
+              className="w-16 h-16 rounded-full object-cover mb-3 border-2 border-purple-800"
             />
             <div className="flex text-yellow-400 mb-2">
               {[...Array(5)].map((_, i) => (
@@ -71,7 +71,7 @@ const CommunityTestimonials = () => {
               ))}
             </div>
             <p className="italic text-purple-500 mb-2">"{t.feedback}"</p>
-            <h4 className="font-semibold text-pink-400">— {t.name}</h4>
+            <h4 className="font-semibold text-purple-500">— {t.name}</h4>
           </div>
         ))}
       </Marquee>
@@ -87,7 +87,7 @@ const CommunityTestimonials = () => {
         {testimonialsBottom.map((t, index) => (
           <div
             key={index}
-            className="bg-purple-200 mx-4 p-6 rounded-lg min-w-[270px] shadow-md flex flex-col items-center text-center"
+            className="mx-4 p-6 rounded-lg min-w-[270px] shadow-md flex flex-col items-center text-center border border-purple-800"
           >
             <img
               src={t.img}
@@ -99,7 +99,7 @@ const CommunityTestimonials = () => {
                 <FaStar key={i} />
               ))}
             </div>
-            <p className="italic text-pink-400 mb-2">"{t.feedback}"</p>
+            <p className="italic text-purple-500 mb-2">"{t.feedback}"</p>
             <h4 className="font-semibold text-purple-500">— {t.name}</h4>
           </div>
         ))}
