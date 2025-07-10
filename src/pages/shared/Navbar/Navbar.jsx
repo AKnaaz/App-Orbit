@@ -1,7 +1,7 @@
 import React, { use } from 'react';
 import { NavLink } from 'react-router';
-import logo from "../../../assets/logo.webp";
 import { AuthContext } from '../../../context/AuthContext/AuthContext';
+import Logo from '../Logo/Logo';
 
 const Navbar = () => {
     const { user, logOut } = use(AuthContext);
@@ -32,12 +32,13 @@ const Navbar = () => {
                         {navItems}
                     </ul>
                 </div>
-                <NavLink to="/">
+                <Logo></Logo>
+                {/* <NavLink to="/">
                     <div className="flex items-center gap-1">
                         <img className="w-8 rounded-full" src={logo} alt="Logo" />
                         <span className="font text-2xl font-bold text-purple-500">AppOrbit</span>
                     </div>
-                </NavLink>
+                </NavLink> */}
             </div>
 
             <div className="navbar-center hidden lg:flex">

@@ -1,7 +1,7 @@
 import React from 'react';
 import { FaFacebook, FaInstagramSquare, FaYoutube } from 'react-icons/fa';
 import { Link } from 'react-router';
-import logo from "../../../assets/logo.webp"
+import Logo from '../Logo/Logo';
 
 const Footer = () => {
   const year = new Date().getFullYear();
@@ -10,13 +10,8 @@ const Footer = () => {
     <footer className="bg-base-100 text-purple-400">
       <div className="footer p-5 mx-auto">
         {/* Logo Section */}
-        <div >
-         <div className='flex items-center gap-0'>
-            <img className='w-8 rounded-full' src={logo} alt="" />  
-            <Link to="/" className="font text-2xl font-bold text-purple-500">
-                AppOrbit
-            </Link>
-         </div>
+        <div>
+          <Logo></Logo>
          <p className="text-sm mt-2">
             Discover & Share Tech Products<br />Built with using MERN
           </p>

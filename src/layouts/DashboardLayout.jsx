@@ -1,5 +1,8 @@
 import React from 'react';
-import { Outlet } from 'react-router';
+import { CgProfile } from 'react-icons/cg';
+import { MdAddBox, MdInventory2 } from 'react-icons/md';
+import { NavLink, Outlet } from 'react-router';
+import Logo from '../pages/shared/Logo/Logo';
 
 const DashboardLayout = () => {
     return (
@@ -38,7 +41,21 @@ const DashboardLayout = () => {
                 <label htmlFor="my-drawer-2" aria-label="close sidebar" className="drawer-overlay"></label>
                 <ul className="menu bg-base-200 text-base-content min-h-full w-80 p-4">
                 {/* Sidebar content here */}
-                
+                <Logo></Logo>
+                <li className='font-bold mt-5'>
+                    <NavLink to="/dashboard/myProfile">
+                    <CgProfile className="inline" size={20}/>
+                    My Profile</NavLink></li>
+
+                <li className='font-bold'>
+                    <NavLink to="/dashboard/addProduct">
+                    <MdAddBox className="inline" size={20}/>
+                    Add Product</NavLink></li>
+
+                <li className='font-bold'>
+                    <NavLink to="/dashboard/myProducts">
+                    <MdInventory2 className="inline" size={20}/>
+                    My Products</NavLink></li>
 
 
 
