@@ -51,13 +51,13 @@ export const router = createBrowserRouter([
         </PrivateRoute>
       },
       {
-        path: "addProduct",
+        path: "add-product",
         element: <PrivateRoute>
           <AddProduct></AddProduct>
         </PrivateRoute>
       },
       {
-        path: "myProducts",
+        path: "my-products",
         element: <PrivateRoute>
           <MyProducts></MyProducts>
         </PrivateRoute>

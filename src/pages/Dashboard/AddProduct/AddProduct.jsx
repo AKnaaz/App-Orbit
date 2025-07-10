@@ -4,6 +4,7 @@ import addBg from '../../../assets/add.webp';
 import { WithContext as ReactTags } from 'react-tag-input';
 import { useForm } from 'react-hook-form';
 import Swal from 'sweetalert2';
+import useAxiosSecure from '../../../hooks/useAxiosSecure';
 
 const KeyCodes = {
   comma: 188,
@@ -15,8 +16,9 @@ const delimiters = [KeyCodes.comma, KeyCodes.enter];
 const AddProduct = () => {
     const { user } = useAuth();
     console.log("plz",user)
+    const axiosSecure = useAxiosSecure();
     const [tags, setTags] = useState([]);
-    const { register, handleSubmit, formState: { errors }  } = useForm();
+    const { register, handleSubmit, formState: { errors }, reset  } = useForm();
 
     const handleDelete = i => {
     setTags(tags.filter((tag, index) => index !== i));
@@ -37,12 +39,19 @@ const AddProduct = () => {
         };
         console.log('Final Submit Data:', fullData);
 
-        Swal.fire({
-            title: 'Product Added!',
-            text: 'Your product has been successfully submitted.',
-            icon: 'success',
-            confirmButtonColor: 'orange',
-            confirmButtonText: 'OK'
+        axiosSecure.post('/add-product', fullData)
+        .then(res => {
+            console.log(res.data);
+            if(res.data.insertedId){
+                Swal.fire({
+                    title: 'Product Added!',
+                    text: 'Your product has been successfully submitted.',
+                    icon: 'success',
+                    confirmButtonColor: 'orange',
+                    confirmButtonText: 'OK'
+                });
+                reset();
+                }
         });
     };
 
