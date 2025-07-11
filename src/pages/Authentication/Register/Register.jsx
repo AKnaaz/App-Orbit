@@ -13,26 +13,25 @@ const Register = () => {
     const from = location.state?.from || "/";
 
 
-    const onSubmit = data => {
-    console.log(data)
-    createUser(data.email, data.password)
-    .then(res => {
-      console.log(res)
+    const onSubmit = async(data) => {
+      console.log(data)
+      try {
+        const res = await createUser(data.email, data.password);
+        console.log(res);
 
-      Swal.fire({
-        title: 'Registration Successful!',
-        text: 'Welcome to AppOrbit.',
-        icon: 'success',
-        confirmButtonColor: '#6B46C1', // Tailwind purple-600
-        confirmButtonText: 'Continue'
-      });
-      navigate(from);
-    })
-    .catch(error => {
-      console.log(error)
-    })
+        await Swal.fire({
+          title: 'Registration Successful!',
+          text: 'Welcome to AppOrbit.',
+          icon: 'success',
+          confirmButtonColor: '#6B46C1',
+          confirmButtonText: 'Continue'
+        });
+
+        navigate(from);
+      } catch (error) {
+        console.log(error);
+      }
     }
-
   return (
     <div
       className="flex items-center justify-center bg-cover bg-center px-4 py-10"

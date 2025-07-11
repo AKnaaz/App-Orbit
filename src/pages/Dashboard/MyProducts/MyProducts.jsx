@@ -4,6 +4,7 @@ import useAuth from '../../../hooks/useAuth';
 import useAxiosSecure from '../../../hooks/useAxiosSecure';
 import { FaEdit, FaTrash } from 'react-icons/fa';
 import Swal from 'sweetalert2';
+import { Link } from 'react-router';
 
 const MyProducts = () => {
     const { user } = useAuth();
@@ -67,9 +68,11 @@ const MyProducts = () => {
                         {product.status || 'Pending'}
                     </td>
                     <td className="px-6 py-4 space-x-2">
-                        <button className="btn bg-[#292466] text-white rounded transition-all duration-200">
-                        <FaEdit /> Update
+                        <Link to={`/dashboard/update/${product._id}`}>
+                            <button className="btn bg-[#292466] text-white rounded transition-all duration-200">
+                            <FaEdit /> Update
                         </button>
+                        </Link>
                         <button onClick={() => handleDelete(product._id)} className="btn bg-[#292466] text-white rounded transition-all duration-200">
                         <FaTrash /> Delete
                         </button>
