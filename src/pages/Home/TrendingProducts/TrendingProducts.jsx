@@ -115,7 +115,7 @@ const TrendingProducts = () => {
         ))}
       </div>
 
-      <div className="text-end mt-24">
+      <div className="text-center mt-24">
         <button
           onClick={() => navigate('/products')}
           className="bg-gradient-to-r from-pink-600 to-purple-700 text-white px-6 py-2 rounded-full hover:scale-105 transition"

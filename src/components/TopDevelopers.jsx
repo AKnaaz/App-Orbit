@@ -68,7 +68,7 @@ const TopDevelopers = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <div className="max-w-sm mx-auto bg-transparent rounded-lg shadow-2xl p-6 flex flex-col items-center space-y-3">
+            <div className="max-w-sm mx-auto bg-gradient-to-r from-pink-600 to-purple-700 rounded-lg shadow-2xl p-6 flex flex-col items-center space-y-3">
               <img
                 src={dev.image}
                 alt={dev.name}
