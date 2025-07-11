@@ -3,12 +3,14 @@ import Banner from '../Banner/Banner';
 import TopDevelopers from '../../../components/TopDevelopers';
 import CommunityTestimonials from '../../../components/CommunityTestimonials';
 import FeaturedProducts from '../FeaturedProducts/FeaturedProducts';
+import TrendingProducts from '../TrendingProducts/TrendingProducts';
 
 const Home = () => {
     return (
         <div>
            <Banner></Banner>
            <FeaturedProducts></FeaturedProducts>
+           <TrendingProducts></TrendingProducts>
            <TopDevelopers></TopDevelopers>
            <CommunityTestimonials></CommunityTestimonials>
         </div>

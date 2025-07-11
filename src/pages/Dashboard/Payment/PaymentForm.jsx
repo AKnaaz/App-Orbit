@@ -7,7 +7,7 @@ import Loading from '../../shared/Loading/Loading';
 import useAuth from '../../../hooks/useAuth';
 import Swal from 'sweetalert2';
 import cardImg from '../../../assets/card.webp'
-import paymentImg from '../../../assets/payment.avif'
+import paymentImg from '../../../assets/money.jpg'
 
 const PaymentForm = () => {
   const stripe = useStripe();
@@ -112,7 +112,7 @@ const PaymentForm = () => {
       }}
     >
         <form onSubmit={handleSubmit}
-        className='space-y-4 p-20 rounded-xl shadow-xl w-full max-w-md mx-auto'
+        className='space-y-4 p-20 rounded-xl shadow-md shadow-gray-400 w-full max-w-md mx-auto'
         style={{
                 backgroundImage: `url(${cardImg})`,
                 backgroundPosition: 'center',
@@ -120,7 +120,7 @@ const PaymentForm = () => {
                 backgroundSize: 'cover'
               }}
         >
-          <CardElement className='p-4 border rounded'>
+          <CardElement className='p-4 border rounded bg-gradient-to-r from-[#DFBD69] to-[#926F34]'>
           </CardElement>
 
           <button
