@@ -1,19 +1,32 @@
 import React from 'react';
-import { Link } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 import SocialLogin from '../SocialLogin/SocialLogin';
 import { useForm } from 'react-hook-form';
 import useAuth from '../../../hooks/useAuth';
+import Swal from 'sweetalert2';
 
 const Register = () => {
 
     const {register, handleSubmit, formState: {errors}} = useForm();
     const { createUser } = useAuth();
+    const navigate = useNavigate();
+    const from = location.state?.from || "/";
+
 
     const onSubmit = data => {
     console.log(data)
     createUser(data.email, data.password)
     .then(res => {
       console.log(res)
+
+      Swal.fire({
+        title: 'Registration Successful!',
+        text: 'Welcome to AppOrbit.',
+        icon: 'success',
+        confirmButtonColor: '#6B46C1', // Tailwind purple-600
+        confirmButtonText: 'Continue'
+      });
+      navigate(from);
     })
     .catch(error => {
       console.log(error)

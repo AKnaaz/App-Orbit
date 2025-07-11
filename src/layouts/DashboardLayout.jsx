@@ -43,7 +43,7 @@ const DashboardLayout = () => {
                 {/* Sidebar content here */}
                 <Logo></Logo>
                 <li className='font-bold mt-5'>
-                    <NavLink to="/dashboard/myProfile">
+                    <NavLink to="/dashboard/my-profile">
                     <CgProfile className="inline" size={20}/>
                     My Profile</NavLink></li>
 

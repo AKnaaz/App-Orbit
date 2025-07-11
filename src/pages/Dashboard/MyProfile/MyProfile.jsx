@@ -1,18 +1,30 @@
 import React from 'react';
 import useAuth from '../../../hooks/useAuth';
-import { FaUserCircle } from 'react-icons/fa';
+import { FaCheckCircle, FaUserCircle } from 'react-icons/fa';
 import { IoMail } from 'react-icons/io5';
 import { AiOutlineCrown } from 'react-icons/ai';
 import profileBg from '../../../assets/bridge.jpg';
 import { useNavigate } from 'react-router';
 import useAxiosSecure from '../../../hooks/useAxiosSecure';
+import { useQuery } from '@tanstack/react-query';
+import Loading from '../../shared/Loading/Loading';
 
 const MyProfile = () => {
   const { user } = useAuth();
   console.log("come bhai",user)
   const axiosSecure = useAxiosSecure();
   const navigate = useNavigate();
-  const subscriptionPrice = '$9.99';
+  const subscriptionPrice = 9.99;
+
+
+  const { data: userInfo = {}, isLoading } = useQuery({
+    queryKey: ['user', user?.email],
+    enabled: !!user?.email,
+    queryFn: async () => {
+      const res = await axiosSecure.get(`/user/${user.email}`);
+      return res.data;
+    }
+  });
 
 
   const handleSubscribe = async(email) => {
@@ -31,6 +43,10 @@ const MyProfile = () => {
     } catch (error) {
       console.error('Error subscribing user:', error);
     }
+  }
+
+  if(isLoading) {
+    return <Loading></Loading>
   };
 
   return (
@@ -60,13 +76,23 @@ const MyProfile = () => {
           <IoMail className="text-white" />
           {user?.email}
         </p>
-        <button
-            onClick={() => handleSubscribe(user.email)}
-            className="mt-6 btn btn-wide bg-gradient-to-r from-gray-700 to-gray-500 text-white font-bold rounded-3xl"
-          >
-            <AiOutlineCrown className="text-xl mr-1" />
-            Subscribe for {subscriptionPrice}
-        </button>
+
+        {
+          userInfo?.isSubscribed ? (
+              <p className="flex justify-center items-center gap-2 mt-2">
+                <FaCheckCircle className='text-white' /> Status: 
+                <span className='text-green-300 font-bold'>Verified</span>
+              </p>
+          ) : (
+            <button
+              onClick={() => handleSubscribe(user.email)}
+              className="mt-6 btn btn-wide bg-gradient-to-r from-gray-700 to-gray-500 text-white font-bold rounded-3xl"
+            >
+              <AiOutlineCrown className="text-xl mr-1" />
+              Subscription price ${subscriptionPrice}
+            </button>
+          )
+        }
       </div>
     </div>
   );
