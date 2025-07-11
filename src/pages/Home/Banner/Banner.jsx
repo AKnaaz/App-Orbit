@@ -6,7 +6,7 @@ import { motion } from 'framer-motion';
 const Banner = () => {
   return (
     <div
-      className="text-white py-12 px-6 md:px-12 lg:px-24 flex flex-col-reverse lg:flex-row items-center justify-between"
+      className="text-white py-24 px-6 md:px-12 lg:px-24 flex flex-col-reverse lg:flex-row items-center justify-between"
       style={{
         background: "linear-gradient(90deg, #0B1120 0%, #1E1B4B 40%, #3B0764 70%, #7C3AED 100%)"
       }}
@@ -31,9 +31,11 @@ const Banner = () => {
               Explore Now
             </button>
           </Link>
-          <button className="border border-purple-800 text-purple-800 hover:bg-purple-800 hover:text-white px-6 py-3 rounded-lg font-semibold">
+          <Link to="/dashboard/add-product">
+            <button className="border border-purple-800 text-purple-800 hover:bg-purple-800 hover:text-white px-6 py-3 rounded-lg font-semibold">
             Add Your Product
           </button>
+          </Link>
         </div>
       </motion.div>
 

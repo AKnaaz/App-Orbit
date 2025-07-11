@@ -11,6 +11,7 @@ const Login = () => {
   const { register, handleSubmit, formState: {errors}} = useForm();
   const {signIn} = useAuth();
   const location = useLocation();
+  console.log(location)
   const navigate = useNavigate();
   const from = location.state?.from || "/";
 

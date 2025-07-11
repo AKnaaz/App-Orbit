@@ -20,7 +20,11 @@ const Navbar = () => {
     };
 
     return (
-        <div className="navbar bg-base-100 shadow-sm">
+        <div className="navbar shadow-sm"
+            style={{
+                background: "linear-gradient(90deg, #0B1120 0%, #1E1B4B 40%, #3B0764 70%, #7C3AED 100%)"
+            }}
+        >
             <div className="navbar-start">
                 <div className="dropdown">
                     <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -65,10 +69,10 @@ const Navbar = () => {
                     ) : (
                         <>
                             <NavLink to="/login">
-                                <button className="btn btn-outline text-purple-500 rounded-3xl hover:bg-purple-500 hover:text-black">Login</button>
+                                <button className="btn btn-outline text-white rounded-3xl font-bold hover:bg-white hover:text-purple-900">Login</button>
                             </NavLink>
                             <NavLink to="/register">
-                                <button className="btn btn-outline text-purple-500 rounded-3xl hover:bg-purple-500 hover:text-black">Register</button>
+                                <button className="btn btn-outline text-white rounded-3xl font-bold hover:bg-white hover:text-purple-900">Register</button>
                             </NavLink>
                         </>
                     )

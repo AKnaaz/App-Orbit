@@ -76,7 +76,7 @@ const Update = () => {
             <input {...register("externalLink")} type="url" className='input input-bordered w-full bg-transparent' />
           </div>
 
-          <button type='submit' className='btn btn-primary w-full mt-4'>Update Product</button>
+          <button type='submit' className='btn bg-transparent w-full mt-4 hover:bg-blue-500'>Update Product</button>
         </form>
       </div>
     </div>

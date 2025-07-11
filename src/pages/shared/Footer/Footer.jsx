@@ -7,7 +7,11 @@ const Footer = () => {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="bg-base-100 text-purple-400">
+    <footer className="text-purple-400"
+      style={{
+        background: "linear-gradient(90deg, #0B1120 0%, #1E1B4B 40%, #3B0764 70%, #7C3AED 100%)"
+      }}
+    >
       <div className="footer p-5 mx-auto">
         {/* Logo Section */}
         <div>

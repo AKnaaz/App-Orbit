@@ -63,7 +63,7 @@ const MyProducts = () => {
                 {products.map((product) => (
                     <tr key={product._id} className="hover:bg-[#1e3d8d]">
                     <td className="px-6 py-4 font-medium">{product.productName}</td>
-                    <td className="px-6 py-4">0</td>
+                    <td className="px-6 py-4">{product.votes || 0}</td>
                     <td className="px-6 py-4 capitalize">
                         {product.status || 'Pending'}
                     </td>
