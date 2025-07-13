@@ -48,7 +48,7 @@ const ReportedContents = () => {
               </td>
               <td className="px-6 py-4">
                 <button
-                onClick={() => handleDelete(product.productId)}  // productId পাঠাচ্ছি
+                onClick={() => handleDelete(product.productId)} 
                 className="btn btn-xs bg-red-600 text-white rounded hover:bg-red-700">
                   Delete
                 </button>

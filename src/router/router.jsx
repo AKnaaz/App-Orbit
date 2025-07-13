@@ -14,6 +14,7 @@ import Update from "../pages/Home/Update/Update";
 import ProductDetails from "../pages/ProductDetails/ProductDetails";
 import ProductReviewQueue from "../pages/Dashboard/ProductReviewQueue/ProductReviewQueue";
 import ReportedContents from "../pages/Dashboard/ReportedContents/ReportedContents";
+import Products from "../pages/Products/Products";
 
 
 export const router = createBrowserRouter([
@@ -39,6 +40,10 @@ export const router = createBrowserRouter([
           element: <PrivateRoute>
             <ProductDetails></ProductDetails>
           </PrivateRoute>
+        },
+        {
+          path: "/products",
+          Component: Products
         }
     ]
   },
