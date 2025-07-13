@@ -1,6 +1,6 @@
 import React from 'react';
 import { CgProfile } from 'react-icons/cg';
-import { MdAddBox, MdInventory2 } from 'react-icons/md';
+import { MdAddBox, MdInventory2, MdOutlineRateReview } from 'react-icons/md';
 import { NavLink, Outlet } from 'react-router';
 import Logo from '../pages/shared/Logo/Logo';
 
@@ -45,18 +45,29 @@ const DashboardLayout = () => {
                 <li className='font-bold mt-5'>
                     <NavLink to="/dashboard/my-profile">
                     <CgProfile className="inline" size={20}/>
-                    My Profile</NavLink></li>
+                    My Profile</NavLink>
+                </li>
 
                 <li className='font-bold'>
                     <NavLink to="/dashboard/add-product">
                     <MdAddBox className="inline" size={20}/>
-                    Add Product</NavLink></li>
+                    Add Product</NavLink>
+                </li>
 
                 <li className='font-bold'>
                     <NavLink to="/dashboard/my-products">
                     <MdInventory2 className="inline" size={20}/>
-                    My Products</NavLink></li>
+                    My Products</NavLink>
+                </li>
 
+                
+
+                <li className="font-bold">
+                    <NavLink to="/dashboard/product-review-queue">
+                        <MdOutlineRateReview className="inline" size={20} />
+                        Product Review Queue
+                    </NavLink>
+                </li>
 
 
 

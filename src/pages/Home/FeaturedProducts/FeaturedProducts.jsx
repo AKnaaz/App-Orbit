@@ -18,15 +18,26 @@ const FeaturedProducts = () => {
   const { user } = useAuth();
 
 
+  // useEffect(() => {
+  //   axiosSecure.get('/products')
+  //     .then(res => {
+  //       const sorted = res.data
+  //         .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+  //         .slice(0, 4);
+  //       setProducts(sorted);
+  //     });
+  // }, [axiosSecure]);
+
   useEffect(() => {
-    axiosSecure.get('/products')
-      .then(res => {
-        const sorted = res.data
-          .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
-          .slice(0, 4);
-        setProducts(sorted);
-      });
-  }, [axiosSecure]);
+  axiosSecure.get('/products?featured=true')
+    .then(res => {
+      const sorted = res.data
+        .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+        .slice(0, 4);
+      setProducts(sorted);
+    });
+}, [axiosSecure]);
+
 
   const handleProductClick = (id) => {
     if (!user) {
