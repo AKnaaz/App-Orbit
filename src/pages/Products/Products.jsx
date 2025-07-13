@@ -17,10 +17,9 @@ const Products = () => {
   const { user } = useAuth();
 
   useEffect(() => {
-    axiosSecure.get('/products?status=accepted')
+    axiosSecure.get('/test-products/accepted') 
       .then(res => {
-        const sorted = res.data
-          .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+        const sorted = res.data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
         setProducts(sorted);
       });
   }, [axiosSecure]);
@@ -34,17 +33,9 @@ const Products = () => {
   };
 
   const handleUpvote = async (product) => {
-    if (!user) {
-      return navigate('/login');
-    }
-
-    if (user?.email === product?.ownerEmail) {
-      return;
-    }
-
-    if (product?.voters?.includes(user?.email)) {
-      return;
-    }
+    if (!user) return navigate('/login');
+    if (user?.email === product?.ownerEmail) return;
+    if (product?.voters?.includes(user?.email)) return;
 
     try {
       const res = await axiosSecure.patch(`/products/vote/${product._id}`, {
@@ -52,15 +43,14 @@ const Products = () => {
       });
 
       if (res.data.modifiedCount > 0) {
-        axiosSecure.get('/products?status=accepted')
+        axiosSecure.get('/test-products/accepted')
           .then(res => {
-            const sorted = res.data
-              .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+            const sorted = res.data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
             setProducts(sorted);
           });
       }
-    } catch (error) {
-      console.error("Vote failed:", error);
+    } catch (err) {
+      console.error('Vote failed:', err);
     }
   };
 
@@ -69,21 +59,24 @@ const Products = () => {
   );
 
   return (
-    <div className="py-10 px-4 md:px-10 min-h-screen"
+    <div className="py-14 px-4 md:px-10 min-h-screen"
       style={{
         background: "linear-gradient(90deg, #0B1120 0%, #1E1B4B 40%, #3B0764 70%, #7C3AED 100%)"
       }}
     >
-      <div className="max-w-md mx-auto mb-16 border rounded">
+      <h2 className='text-3xl font-bold text-center text-purple-700 my-10'>All Products</h2>
+      {/* Search Bar */}
+      <div className="max-w-md mx-auto mb-12">
         <input
           type="text"
           placeholder="Search products..."
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          className="w-full px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-600"
+          className="w-full px-4 py-2 rounded-md focus:outline-none border my-10"
         />
       </div>
 
+      {/* Product Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
         {filteredProducts.length > 0 ? (
           filteredProducts.map((product, index) => (
@@ -102,21 +95,23 @@ const Products = () => {
                 >
                   {product.productName}
                 </h3>
+
                 <div className="flex flex-wrap gap-2 mb-4">
-                  {product.tags?.map((tag, idx) => (
+                  {product.tags?.map((tag, i) => (
                     <span
-                      key={idx}
+                      key={i}
                       className="bg-white text-pink-500 px-2 py-1 rounded-full text-xs font-medium"
                     >
                       #{tag}
                     </span>
                   ))}
                 </div>
+
                 <div className="flex justify-between items-center">
                   <button
                     onClick={() => handleUpvote(product)}
                     disabled={false}
-                    className="flex items-center gap-2 px-4 py-1 bg-pink-600 text-white rounded hover:bg-pink-800 justify-center"
+                    className="flex items-center gap-2 px-4 py-1 bg-pink-600 text-white rounded hover:bg-pink-800"
                   >
                     <AiTwotoneLike />
                     <span>{product.votes || 0} Upvotes</span>
@@ -129,7 +124,7 @@ const Products = () => {
             </motion.div>
           ))
         ) : (
-          <p className="text-center text-white col-span-full">No products found.</p>
+          <p className="text-white text-center col-span-full">No products found.</p>
         )}
       </div>
     </div>
