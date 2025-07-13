@@ -12,17 +12,23 @@ dayjs.extend(relativeTime);
 const Products = () => {
   const [products, setProducts] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
+  const [page, setPage] = useState(1);
+  const [totalProducts, setTotalProducts] = useState(0);
+
+  const limit = 6;
+  const totalPages = Math.ceil(totalProducts / limit);
+
   const axiosSecure = useAxiosSecure();
   const navigate = useNavigate();
   const { user } = useAuth();
 
   useEffect(() => {
-    axiosSecure.get(`/test-products/accepted?search=${searchTerm}`)
+    axiosSecure.get(`/test-products/accepted?page=${page}&limit=${limit}`)
       .then(res => {
-        const sorted = res.data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
-        setProducts(sorted);
+        setProducts(res.data.products);
+        setTotalProducts(res.data.total);
       });
-  }, [axiosSecure, searchTerm]);
+  }, [axiosSecure, page]);
 
   const handleProductClick = (id) => {
     if (!user) {
@@ -34,8 +40,8 @@ const Products = () => {
 
   const handleUpvote = async (product) => {
     if (!user) return navigate('/login');
-    if (user?.email === product?.ownerEmail) return;
-    if (product?.voters?.includes(user?.email)) return;
+    if (user.email === product.ownerEmail) return;
+    if (product.voters.includes(user.email)) return;
 
     try {
       const res = await axiosSecure.patch(`/products/vote/${product._id}`, {
@@ -43,41 +49,37 @@ const Products = () => {
       });
 
       if (res.data.modifiedCount > 0) {
-        // refetch updated data
-        axiosSecure.get(`/test-products/accepted?search=${searchTerm}`)
-          .then(res => {
-            const sorted = res.data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
-            setProducts(sorted);
-          });
+        const updated = await axiosSecure.get(`/test-products/accepted?page=${page}&limit=${limit}`);
+        setProducts(updated.data.products);
       }
     } catch (err) {
-      console.error('Vote failed:', err);
+      console.error("Vote failed:", err);
     }
   };
 
+  const filteredProducts = products.filter(product =>
+    product.productName.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   return (
-    <div className="py-14 px-4 md:px-10 min-h-screen"
+    <div className="py-10 px-4 md:px-10 min-h-screen"
       style={{
         background: "linear-gradient(90deg, #0B1120 0%, #1E1B4B 40%, #3B0764 70%, #7C3AED 100%)"
       }}
     >
-      <h2 className='text-3xl font-bold text-center text-purple-700 my-10'>All Products</h2>
-
-      {/* Search Bar */}
-      <div className="max-w-md mx-auto mb-12">
+      <div className="max-w-md mx-auto mb-16 border rounded">
         <input
           type="text"
           placeholder="Search products..."
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          className="w-full px-4 py-2 rounded-md focus:outline-none border my-10"
+          className="w-full px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-600"
         />
       </div>
 
-      {/* Product Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-        {products.length > 0 ? (
-          products.map((product, index) => (
+        {filteredProducts.length > 0 ? (
+          filteredProducts.map((product, index) => (
             <motion.div
               key={product._id}
               className="rounded-lg shadow-lg overflow-hidden border hover:shadow-2xl transition duration-300 cursor-pointer"
@@ -85,7 +87,7 @@ const Products = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1, duration: 0.5 }}
             >
-              <img src={product.productImage} alt={product.productName} className="w-full h-48 object-cover bg-black" />
+              <img src={product.productImage} alt={product.productName} className="w-full h-48 bg-black" />
               <div className="p-4">
                 <h3
                   onClick={() => handleProductClick(product._id)}
@@ -93,23 +95,17 @@ const Products = () => {
                 >
                   {product.productName}
                 </h3>
-
                 <div className="flex flex-wrap gap-2 mb-4">
-                  {product.tags?.map((tag, i) => (
-                    <span
-                      key={i}
-                      className="bg-white text-pink-500 px-2 py-1 rounded-full text-xs font-medium"
-                    >
+                  {product.tags.map((tag, i) => (
+                    <span key={i} className="bg-white text-pink-500 px-2 py-1 rounded-full text-xs font-medium">
                       #{tag}
                     </span>
                   ))}
                 </div>
-
                 <div className="flex justify-between items-center">
                   <button
                     onClick={() => handleUpvote(product)}
-                    disabled={user?.email === product.ownerEmail || product?.voters?.includes(user?.email)}
-                    className="flex items-center gap-2 px-4 py-1 bg-pink-600 text-white rounded hover:bg-pink-800 disabled:opacity-50"
+                    className="flex items-center gap-2 px-4 py-1 bg-pink-600 text-white rounded hover:bg-pink-800 justify-center"
                   >
                     <AiTwotoneLike />
                     <span>{product.votes || 0} Upvotes</span>
@@ -125,6 +121,21 @@ const Products = () => {
           <p className="text-white text-center col-span-full">No products found.</p>
         )}
       </div>
+
+      {/* Pagination Buttons */}
+      {totalPages > 1 && (
+        <div className="flex justify-center mt-10 gap-3">
+          {Array.from({ length: totalPages }, (_, i) => (
+            <button
+              key={i}
+              onClick={() => setPage(i + 1)}
+              className={`px-4 py-2 rounded ${page === i + 1 ? 'bg-purple-700 text-white' : 'bg-gray-200 text-black'}`}
+            >
+              {i + 1}
+            </button>
+          ))}
+        </div>
+      )}
     </div>
   );
 };
