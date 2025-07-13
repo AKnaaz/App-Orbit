@@ -1,37 +1,80 @@
-import React from 'react';
-import { Link, useNavigate } from 'react-router';
+import React, { useState } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router';
 import SocialLogin from '../SocialLogin/SocialLogin';
 import { useForm } from 'react-hook-form';
 import useAuth from '../../../hooks/useAuth';
 import Swal from 'sweetalert2';
+import useAxios from '../../../hooks/useAxios';
+import axios from 'axios';
+
 
 const Register = () => {
 
     const {register, handleSubmit, formState: {errors}} = useForm();
-    const { createUser } = useAuth();
+    const { createUser, updateUserProfile } = useAuth();
+    const [profilePic, setProfilePic] = useState("");
+    const axiosInstance = useAxios();
+    const location = useLocation();
     const navigate = useNavigate();
     const from = location.state?.from || "/";
 
 
-    const onSubmit = async(data) => {
-      console.log(data)
-      try {
-        const res = await createUser(data.email, data.password);
-        console.log(res);
+    const onSubmit = data => {
+        console.log(data)
+        createUser(data.email, data.password)
+        .then( async(result) => {
+            console.log(result.user)
 
-        await Swal.fire({
-          title: 'Registration Successful!',
-          text: 'Welcome to AppOrbit.',
-          icon: 'success',
-          confirmButtonColor: '#6B46C1',
-          confirmButtonText: 'Continue'
-        });
+            // update user info in the database
+            const userInfo = {
+              email: data.email,
+              role: 'user', //default role
+              created_at: new Date().toISOString(),
+              last_log_in: new Date().toISOString(),
+            }
 
-        navigate(from);
-      } catch (error) {
-        console.log(error);
-      }
+            const userRes = await axiosInstance.post("/user", userInfo);
+            console.log(userRes.data);
+
+            // update user profile in firebase
+            const userProfile = {
+              displayName: data.name,
+              photoURL: profilePic
+            }
+            updateUserProfile(userProfile)
+            .then( async() => {
+              console.log("Profile pic updated")
+
+              await Swal.fire({
+                title: 'Registration Successful!',
+                text: 'Welcome to AppOrbit.',
+                icon: 'success',
+                confirmButtonColor: '#6B46C1',
+                confirmButtonText: 'Continue'
+              });
+              navigate(from);
+            })
+            .catch(error => {
+              console.log(error)
+            })
+        })
+        .catch(error => {
+            console.log(error)
+        })
     }
+
+    const handleImageUpload = async(e) => {
+      const image = e.target.files[0]
+      console.log(image)
+      const formData = new FormData();
+      formData.append("image", image)
+      const imageUploadUrl = `http://localhost:3000/1/upload?key=${import.meta.env.VITE_image_upload_key}`
+
+      const res = await axios.post(imageUploadUrl, formData)
+
+      setProfilePic(res.data.data.url)
+    }
+
   return (
     <div
       className="flex items-center justify-center bg-cover bg-center px-4 py-10"
@@ -71,9 +114,10 @@ const Register = () => {
             <div>
                 <label className="block text-sm font-medium text-purple-700 mb-1">Photo URL</label>
                 <input
-                 type="url"
+                 type="file"
+                 onChange={handleImageUpload}
                  placeholder="Photo URL"
-                 className="w-full px-4 py-2 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-400 placeholder:text-gray-400 text-gray-800"
+                 className="w-full px-4 py-2 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-400 text-gray-400"
                  required
                 />
             </div>

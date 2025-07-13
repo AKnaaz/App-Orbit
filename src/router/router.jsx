@@ -11,6 +11,7 @@ import Payment from "../pages/Dashboard/Payment/Payment";
 import AddProduct from "../pages/Dashboard/AddProduct/AddProduct";
 import MyProducts from "../pages/Dashboard/MyProducts/MyProducts";
 import Update from "../pages/Home/Update/Update";
+import ProductDetails from "../pages/ProductDetails/ProductDetails";
 
 
 export const router = createBrowserRouter([
@@ -30,6 +31,12 @@ export const router = createBrowserRouter([
         {
           path: "/register",
           Component: Register
+        },
+        {
+          path: "/product/:id",
+          element: <PrivateRoute>
+            <ProductDetails></ProductDetails>
+          </PrivateRoute>
         }
     ]
   },
