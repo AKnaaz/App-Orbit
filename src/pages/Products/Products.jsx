@@ -17,12 +17,12 @@ const Products = () => {
   const { user } = useAuth();
 
   useEffect(() => {
-    axiosSecure.get('/test-products/accepted') 
+    axiosSecure.get(`/test-products/accepted?search=${searchTerm}`)
       .then(res => {
         const sorted = res.data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
         setProducts(sorted);
       });
-  }, [axiosSecure]);
+  }, [axiosSecure, searchTerm]);
 
   const handleProductClick = (id) => {
     if (!user) {
@@ -43,7 +43,8 @@ const Products = () => {
       });
 
       if (res.data.modifiedCount > 0) {
-        axiosSecure.get('/test-products/accepted')
+        // refetch updated data
+        axiosSecure.get(`/test-products/accepted?search=${searchTerm}`)
           .then(res => {
             const sorted = res.data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
             setProducts(sorted);
@@ -54,10 +55,6 @@ const Products = () => {
     }
   };
 
-  const filteredProducts = products.filter(product =>
-    product.productName.toLowerCase().includes(searchTerm.toLowerCase())
-  );
-
   return (
     <div className="py-14 px-4 md:px-10 min-h-screen"
       style={{
@@ -65,6 +62,7 @@ const Products = () => {
       }}
     >
       <h2 className='text-3xl font-bold text-center text-purple-700 my-10'>All Products</h2>
+
       {/* Search Bar */}
       <div className="max-w-md mx-auto mb-12">
         <input
@@ -78,8 +76,8 @@ const Products = () => {
 
       {/* Product Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-        {filteredProducts.length > 0 ? (
-          filteredProducts.map((product, index) => (
+        {products.length > 0 ? (
+          products.map((product, index) => (
             <motion.div
               key={product._id}
               className="rounded-lg shadow-lg overflow-hidden border hover:shadow-2xl transition duration-300 cursor-pointer"
@@ -87,7 +85,7 @@ const Products = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1, duration: 0.5 }}
             >
-              <img src={product.productImage} alt={product.productName} className="w-full h-48 bg-black" />
+              <img src={product.productImage} alt={product.productName} className="w-full h-48 object-cover bg-black" />
               <div className="p-4">
                 <h3
                   onClick={() => handleProductClick(product._id)}
@@ -110,8 +108,8 @@ const Products = () => {
                 <div className="flex justify-between items-center">
                   <button
                     onClick={() => handleUpvote(product)}
-                    disabled={false}
-                    className="flex items-center gap-2 px-4 py-1 bg-pink-600 text-white rounded hover:bg-pink-800"
+                    disabled={user?.email === product.ownerEmail || product?.voters?.includes(user?.email)}
+                    className="flex items-center gap-2 px-4 py-1 bg-pink-600 text-white rounded hover:bg-pink-800 disabled:opacity-50"
                   >
                     <AiTwotoneLike />
                     <span>{product.votes || 0} Upvotes</span>
