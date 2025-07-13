@@ -13,6 +13,7 @@ import MyProducts from "../pages/Dashboard/MyProducts/MyProducts";
 import Update from "../pages/Home/Update/Update";
 import ProductDetails from "../pages/ProductDetails/ProductDetails";
 import ProductReviewQueue from "../pages/Dashboard/ProductReviewQueue/ProductReviewQueue";
+import ReportedContents from "../pages/Dashboard/ReportedContents/ReportedContents";
 
 
 export const router = createBrowserRouter([
@@ -81,6 +82,12 @@ export const router = createBrowserRouter([
         path: "product-review-queue",
         element: <PrivateRoute>
           <ProductReviewQueue></ProductReviewQueue>
+        </PrivateRoute>
+      },
+      {
+        path: "reported-contents",
+        element: <PrivateRoute>
+          <ReportedContents></ReportedContents>
         </PrivateRoute>
       }
     ]
