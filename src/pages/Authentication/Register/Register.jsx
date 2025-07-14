@@ -28,6 +28,8 @@ const Register = () => {
             // update user info in the database
             const userInfo = {
               email: data.email,
+              name: data.name,                  // ✅ Add this
+              photo: profilePic,   
               role: 'user', //default role
               created_at: new Date().toISOString(),
               last_log_in: new Date().toISOString(),

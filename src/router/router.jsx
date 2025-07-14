@@ -15,6 +15,7 @@ import ProductDetails from "../pages/ProductDetails/ProductDetails";
 import ProductReviewQueue from "../pages/Dashboard/ProductReviewQueue/ProductReviewQueue";
 import ReportedContents from "../pages/Dashboard/ReportedContents/ReportedContents";
 import Products from "../pages/Products/Products";
+import ManageUsers from "../pages/Dashboard/ManageUsers/ManageUsers";
 
 
 export const router = createBrowserRouter([
@@ -93,6 +94,12 @@ export const router = createBrowserRouter([
         path: "reported-contents",
         element: <PrivateRoute>
           <ReportedContents></ReportedContents>
+        </PrivateRoute>
+      },
+      {
+        path: "manage-users",
+        element: <PrivateRoute>
+          <ManageUsers></ManageUsers>
         </PrivateRoute>
       }
     ]
