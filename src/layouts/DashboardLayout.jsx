@@ -1,6 +1,6 @@
 import React from 'react';
 import { CgProfile } from 'react-icons/cg';
-import { MdAddBox, MdInventory2, MdOutlineRateReview, MdOutlineReportProblem, MdPeopleOutline } from 'react-icons/md';
+import { MdAddBox, MdBarChart, MdInventory2, MdOutlineRateReview, MdOutlineReportProblem, MdPeopleOutline } from 'react-icons/md';
 import { NavLink, Outlet } from 'react-router';
 import Logo from '../pages/shared/Logo/Logo';
 
@@ -62,6 +62,8 @@ const DashboardLayout = () => {
 
                 
 
+
+
                 <li className="font-bold">
                     <NavLink to="/dashboard/product-review-queue">
                         <MdOutlineRateReview className="inline" size={20} />
@@ -78,12 +80,22 @@ const DashboardLayout = () => {
 
 
 
+
+
                 <li className="font-bold">
                     <NavLink to="/dashboard/manage-users">
                         <MdPeopleOutline className="inline" size={20} />
                         Manage Users
                     </NavLink>
                 </li>
+
+                <li className="font-bold">
+                    <NavLink to="/dashboard/admin-statistics">
+                        <MdBarChart className="inline" size={20} />
+                        Admin Statistics
+                    </NavLink>
+                </li>
+
 
 
 

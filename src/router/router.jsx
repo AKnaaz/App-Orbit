@@ -16,6 +16,7 @@ import ProductReviewQueue from "../pages/Dashboard/ProductReviewQueue/ProductRev
 import ReportedContents from "../pages/Dashboard/ReportedContents/ReportedContents";
 import Products from "../pages/Products/Products";
 import ManageUsers from "../pages/Dashboard/ManageUsers/ManageUsers";
+import AdminStatistics from "../pages/Dashboard/AdminStatistics/AdminStatistics";
 
 
 export const router = createBrowserRouter([
@@ -100,6 +101,12 @@ export const router = createBrowserRouter([
         path: "manage-users",
         element: <PrivateRoute>
           <ManageUsers></ManageUsers>
+        </PrivateRoute>
+      },
+      {
+        path: "admin-statistics",
+        element: <PrivateRoute>
+          <AdminStatistics></AdminStatistics>
         </PrivateRoute>
       }
     ]

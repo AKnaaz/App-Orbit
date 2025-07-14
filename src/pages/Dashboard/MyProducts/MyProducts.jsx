@@ -65,7 +65,7 @@ const MyProducts = () => {
                     <td className="px-6 py-4 font-medium">{product.productName}</td>
                     <td className="px-6 py-4">{product.votes || 0}</td>
                     <td className="px-6 py-4 capitalize">
-                        {product.status || 'Pending'}
+                        {product.status}
                     </td>
                     <td className="px-6 py-4 space-x-2">
                         <Link to={`/dashboard/update/${product._id}`}>
