@@ -17,6 +17,8 @@ import ReportedContents from "../pages/Dashboard/ReportedContents/ReportedConten
 import Products from "../pages/Products/Products";
 import ManageUsers from "../pages/Dashboard/ManageUsers/ManageUsers";
 import AdminStatistics from "../pages/Dashboard/AdminStatistics/AdminStatistics";
+import ManageCoupons from "../pages/Dashboard/ManageCoupons/ManageCoupons";
+import UpdateCoupon from "../pages/Dashboard/UpdateCoupon/UpdateCoupon";
 
 
 export const router = createBrowserRouter([
@@ -107,6 +109,18 @@ export const router = createBrowserRouter([
         path: "admin-statistics",
         element: <PrivateRoute>
           <AdminStatistics></AdminStatistics>
+        </PrivateRoute>
+      },
+      {
+        path: "manage-coupons",
+        element: <PrivateRoute>
+          <ManageCoupons></ManageCoupons>
+        </PrivateRoute>
+      },
+      {
+        path: "update-coupon/:id",
+        element: <PrivateRoute>
+          <UpdateCoupon></UpdateCoupon>
         </PrivateRoute>
       }
     ]

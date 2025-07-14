@@ -1,6 +1,6 @@
 import React from 'react';
 import { CgProfile } from 'react-icons/cg';
-import { MdAddBox, MdBarChart, MdInventory2, MdOutlineRateReview, MdOutlineReportProblem, MdPeopleOutline } from 'react-icons/md';
+import { MdAddBox, MdBarChart, MdInventory2, MdLocalOffer, MdOutlineRateReview, MdOutlineReportProblem, MdPeopleOutline } from 'react-icons/md';
 import { NavLink, Outlet } from 'react-router';
 import Logo from '../pages/shared/Logo/Logo';
 
@@ -93,6 +93,13 @@ const DashboardLayout = () => {
                     <NavLink to="/dashboard/admin-statistics">
                         <MdBarChart className="inline" size={20} />
                         Admin Statistics
+                    </NavLink>
+                </li>
+
+                <li className="font-bold">
+                    <NavLink to="/dashboard/manage-coupons">
+                        <MdLocalOffer className="inline" size={20} />
+                        Manage Coupons
                     </NavLink>
                 </li>
 
