@@ -4,6 +4,7 @@ import TopDevelopers from '../../../components/TopDevelopers';
 import CommunityTestimonials from '../../../components/CommunityTestimonials';
 import FeaturedProducts from '../FeaturedProducts/FeaturedProducts';
 import TrendingProducts from '../TrendingProducts/TrendingProducts';
+import CouponSlider from '../../Dashboard/CouponSlider/CouponSlider';
 
 const Home = () => {
     return (
@@ -11,6 +12,7 @@ const Home = () => {
            <Banner></Banner>
            <FeaturedProducts></FeaturedProducts>
            <TrendingProducts></TrendingProducts>
+           <CouponSlider></CouponSlider>
            <TopDevelopers></TopDevelopers>
            <CommunityTestimonials></CommunityTestimonials>
         </div>
