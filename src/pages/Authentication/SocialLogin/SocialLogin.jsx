@@ -2,18 +2,33 @@ import React from 'react';
 import useAuth from '../../../hooks/useAuth';
 import { useLocation, useNavigate } from 'react-router';
 import Swal from 'sweetalert2';
+import useAxios from '../../../hooks/useAxios';
 
 const SocialLogin = () => {
 
     const {signInWithGoogle} = useAuth();
+    const axiosInstance = useAxios();
     const location = useLocation();
     const navigate = useNavigate();
     const from = location.state?.from || "/";
 
     const handleGoogleSignIn = () => {
         signInWithGoogle()
-        .then(res => {
-            console.log(res)
+        .then( async(result) => {
+            const user = result.user;
+            console.log(result);
+
+            // update user info in the database
+            const userInfo = {
+              email: user.email,  
+              role: 'user', //default role
+              created_at: new Date().toISOString(),
+              last_log_in: new Date().toISOString(),
+            }
+
+            const res = await axiosInstance.post('/user', userInfo);
+            console.log("user update",res.data);
+
             Swal.fire({
              icon: 'success',
              title: 'Login Successful',

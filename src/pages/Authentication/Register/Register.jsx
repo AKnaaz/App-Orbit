@@ -28,7 +28,7 @@ const Register = () => {
             // update user info in the database
             const userInfo = {
               email: data.email,
-              name: data.name,                  // ✅ Add this
+              name: data.name,                 
               photo: profilePic,   
               role: 'user', //default role
               created_at: new Date().toISOString(),
@@ -70,11 +70,12 @@ const Register = () => {
       console.log(image)
       const formData = new FormData();
       formData.append("image", image)
-      const imageUploadUrl = `http://localhost:3000/1/upload?key=${import.meta.env.VITE_image_upload_key}`
+      const imageUploadUrl = `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_image_upload_key}`
 
       const res = await axios.post(imageUploadUrl, formData)
 
-      setProfilePic(res.data.data.url)
+      // setProfilePic(res.data.data.url)
+      setProfilePic(res.data.data.url);
     }
 
   return (
@@ -119,7 +120,7 @@ const Register = () => {
                  type="file"
                  onChange={handleImageUpload}
                  placeholder="Photo URL"
-                 className="w-full px-4 py-2 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-400 text-gray-400"
+                 className="input w-full px-4 py-2 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-400 text-gray-400 bg-white"
                  required
                 />
             </div>

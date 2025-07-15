@@ -138,7 +138,7 @@ const PaymentForm = () => {
             placeholder="Enter coupon code"
             value={couponCode}
             onChange={(e) => setCouponCode(e.target.value)}
-            className="input input-bordered w-full bg-gradient-to-r from-[#DFBD69] to-[#926F34] text-white placeholder:text-white"
+            className="input input-bordered w-full bg-gradient-to-r from-[#DFBD69] to-[#926F34] placeholder:text-gray-500"
           />
           <span className='text-white font-semibold'>Coupon</span>
         </div>
