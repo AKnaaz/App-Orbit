@@ -19,64 +19,72 @@ const Register = () => {
     const from = location.state?.from || "/";
 
 
-    const onSubmit = data => {
-        console.log(data)
-        createUser(data.email, data.password)
-        .then( async(result) => {
-            console.log(result.user)
+    const onSubmit = async (data) => {
+    try {
+      const result = await createUser(data.email, data.password);
+      const user = result.user;
 
-            // update user info in the database
-            const userInfo = {
-              email: data.email,
-              name: data.name,                 
-              photo: profilePic,   
-              role: 'user', //default role
-              created_at: new Date().toISOString(),
-              last_log_in: new Date().toISOString(),
-            }
+      if (!user) throw new Error("User creation failed");
 
-            const userRes = await axiosInstance.post("/user", userInfo);
-            console.log(userRes.data);
+      // Prepare userInfo
+      const userInfo = {
+        email: data.email,
+        name: data.name,
+        photo: profilePic,
+        role: 'user',
+        created_at: new Date().toISOString(),
+        last_log_in: new Date().toISOString(),
+      };
 
-            // update user profile in firebase
-            const userProfile = {
-              displayName: data.name,
-              photoURL: profilePic
-            }
-            updateUserProfile(userProfile)
-            .then( async() => {
-              console.log("Profile pic updated")
+      // Save to DB
+      const userRes = await axiosInstance.post("/user", userInfo);
+      if (!userRes?.data?.acknowledged && !userRes?.data?.upsertedId) {
+        throw new Error("User DB insertion failed");
+      }
 
-              await Swal.fire({
-                title: 'Registration Successful!',
-                text: 'Welcome to AppOrbit.',
-                icon: 'success',
-                confirmButtonColor: '#6B46C1',
-                confirmButtonText: 'Continue'
-              });
-              navigate(from);
-            })
-            .catch(error => {
-              console.log(error)
-            })
-        })
-        .catch(error => {
-            console.log(error)
-        })
+      // Firebase Profile Update
+      await updateUserProfile({
+        displayName: data.name,
+        photoURL: profilePic
+      });
+
+      // Show SweetAlert
+      await Swal.fire({
+        title: 'Registration Successful!',
+        text: 'Welcome to AppOrbit.',
+        icon: 'success',
+        confirmButtonColor: '#6B46C1',
+        confirmButtonText: 'Continue'
+      });
+
+      // Navigate
+      navigate(from);
+      
+    } catch (error) {
+      console.error("Registration Error:", error);
+      Swal.fire({
+        title: "Error!",
+        text: error.message || "Registration failed. Try again.",
+        icon: "error",
+        confirmButtonColor: '#d33',
+      });
     }
+  };
 
     const handleImageUpload = async(e) => {
-      const image = e.target.files[0]
-      console.log(image)
+      const image = e.target.files[0];
       const formData = new FormData();
-      formData.append("image", image)
-      const imageUploadUrl = `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_image_upload_key}`
+      formData.append("image", image);
 
-      const res = await axios.post(imageUploadUrl, formData)
-
-      // setProfilePic(res.data.data.url)
-      setProfilePic(res.data.data.url);
+      try {
+        const imageUploadUrl = `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_image_upload_key}`;
+        const res = await axios.post(imageUploadUrl, formData);
+        setProfilePic(res.data.data.url);
+      } catch (error) {
+        console.error("Image upload failed:", error);
+      }
     }
+
 
   return (
     <div

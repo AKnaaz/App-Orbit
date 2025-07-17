@@ -4,6 +4,7 @@ import {
   PieChart, Pie, Cell, Tooltip, Legend, ResponsiveContainer,
 } from 'recharts';
 import useAxiosSecure from '../../../hooks/useAxiosSecure';
+import Loading from '../../shared/Loading/Loading'
 
 const COLORS = ['#22C55E', '#F59E0B', '#EF4444', '#3B82F6', '#8B5CF6'];
 
@@ -18,7 +19,7 @@ const AdminStatistics = () => {
     }
   });
 
-  if (isLoading) return <p>Loading...</p>
+  if (isLoading) return <Loading></Loading>;
   if (isError) return <p className="text-error">Failed to fetch statistics.</p>;
 
   const { productStatusCounts, totalUsers, totalReviews } = data || {};

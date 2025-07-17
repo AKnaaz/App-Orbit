@@ -3,8 +3,10 @@ import { CgProfile } from 'react-icons/cg';
 import { MdAddBox, MdBarChart, MdInventory2, MdLocalOffer, MdOutlineRateReview, MdOutlineReportProblem, MdPeopleOutline } from 'react-icons/md';
 import { NavLink, Outlet } from 'react-router';
 import Logo from '../pages/shared/Logo/Logo';
+import useUserRole from '../hooks/useUserRole';
 
 const DashboardLayout = () => {
+    const { role, roleLoading } = useUserRole();
     return (
         <div className="drawer lg:drawer-open">
             <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
@@ -41,48 +43,54 @@ const DashboardLayout = () => {
                 <label htmlFor="my-drawer-2" aria-label="close sidebar" className="drawer-overlay"></label>
                 <ul className="menu bg-base-200 text-base-content min-h-full w-80 p-4">
                 {/* Sidebar content here */}
-                <Logo></Logo>
-                <li className='font-bold mt-5'>
+                <div className='mb-5'>
+                    <Logo></Logo>
+                </div>
+                
+                {!roleLoading && role?.toLowerCase().trim() === 'user' &&
+                    <>
+                    <li className='font-bold mt-5'>
                     <NavLink to="/dashboard/my-profile">
                     <CgProfile className="inline" size={20}/>
                     My Profile</NavLink>
-                </li>
+                    </li>
 
-                <li className='font-bold'>
-                    <NavLink to="/dashboard/add-product">
-                    <MdAddBox className="inline" size={20}/>
-                    Add Product</NavLink>
-                </li>
+                    <li className='font-bold'>
+                        <NavLink to="/dashboard/add-product">
+                        <MdAddBox className="inline" size={20}/>
+                        Add Product</NavLink>
+                    </li>
 
-                <li className='font-bold'>
-                    <NavLink to="/dashboard/my-products">
-                    <MdInventory2 className="inline" size={20}/>
-                    My Products</NavLink>
-                </li>
-
-                
-
-
-
-                <li className="font-bold">
+                    <li className='font-bold'>
+                        <NavLink to="/dashboard/my-products">
+                        <MdInventory2 className="inline" size={20}/>
+                        My Products</NavLink>
+                    </li>
+                    </>
+                }
+               
+                {!roleLoading && role?.toLowerCase().trim() === 'moderator' &&
+                    <>
+                    <li className="font-bold">
                     <NavLink to="/dashboard/product-review-queue">
                         <MdOutlineRateReview className="inline" size={20} />
                         Product Review Queue
                     </NavLink>
-                </li>
+                    </li>
 
-                <li className="font-bold">
-                    <NavLink to="/dashboard/reported-contents">
-                        <MdOutlineReportProblem className="inline" size={20} />
-                        Reported Contents
-                    </NavLink>
-                </li>
+                    <li className="font-bold">
+                        <NavLink to="/dashboard/reported-contents">
+                            <MdOutlineReportProblem className="inline" size={20} />
+                            Reported Contents
+                        </NavLink>
+                    </li>
+                    </>
+                }
 
 
-
-
-
-                <li className="font-bold">
+               {!roleLoading && role?.toLowerCase().trim() === 'admin' &&
+                <>
+                 <li className="font-bold">
                     <NavLink to="/dashboard/manage-users">
                         <MdPeopleOutline className="inline" size={20} />
                         Manage Users
@@ -102,9 +110,8 @@ const DashboardLayout = () => {
                         Manage Coupons
                     </NavLink>
                 </li>
-
-
-
+                </>
+               }
 
 
                 </ul>

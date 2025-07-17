@@ -19,6 +19,9 @@ import ManageUsers from "../pages/Dashboard/ManageUsers/ManageUsers";
 import AdminStatistics from "../pages/Dashboard/AdminStatistics/AdminStatistics";
 import ManageCoupons from "../pages/Dashboard/ManageCoupons/ManageCoupons";
 import UpdateCoupon from "../pages/Dashboard/UpdateCoupon/UpdateCoupon";
+import AdminRoute from "../routes/AdminRoute";
+import ModeratorRoute from "../routes/ModeratorRoute";
+import UserRoute from "../routes/UserRoute";
 
 
 export const router = createBrowserRouter([
@@ -59,69 +62,70 @@ export const router = createBrowserRouter([
     children: [
       {
         path: "my-profile",
-        element: <PrivateRoute>
-         <MyProfile></MyProfile>
-        </PrivateRoute>
+        element: <UserRoute>
+          <MyProfile></MyProfile>
+        </UserRoute>
+  
       },
       {
         path: "payment/:email",
-        element: <PrivateRoute>
-          <Payment></Payment>
-        </PrivateRoute>
+        element: <UserRoute>
+           <Payment></Payment>
+        </UserRoute>
       },
       {
         path: "add-product",
-        element: <PrivateRoute>
+        element: <UserRoute>
           <AddProduct></AddProduct>
-        </PrivateRoute>
+        </UserRoute>
       },
       {
         path: "my-products",
-        element: <PrivateRoute>
+        element: <UserRoute>
           <MyProducts></MyProducts>
-        </PrivateRoute>
+        </UserRoute>
       },
       {
         path: "update/:id",
-        element: <PrivateRoute>
+        element: <UserRoute>
           <Update></Update>
-        </PrivateRoute>
+        </UserRoute>
       },
       {
         path: "product-review-queue",
-        element: <PrivateRoute>
-          <ProductReviewQueue></ProductReviewQueue>
-        </PrivateRoute>
+        element: <ModeratorRoute>
+           <ProductReviewQueue></ProductReviewQueue>
+        </ModeratorRoute>
       },
       {
         path: "reported-contents",
-        element: <PrivateRoute>
+        element: <ModeratorRoute>
           <ReportedContents></ReportedContents>
-        </PrivateRoute>
+        </ModeratorRoute>
       },
       {
         path: "manage-users",
-        element: <PrivateRoute>
+        element: <AdminRoute>
           <ManageUsers></ManageUsers>
-        </PrivateRoute>
+        </AdminRoute>
       },
       {
         path: "admin-statistics",
-        element: <PrivateRoute>
+        element: <AdminRoute>
           <AdminStatistics></AdminStatistics>
-        </PrivateRoute>
+        </AdminRoute>
       },
       {
         path: "manage-coupons",
-        element: <PrivateRoute>
+        element: <AdminRoute>
           <ManageCoupons></ManageCoupons>
-        </PrivateRoute>
+        </AdminRoute>
       },
       {
         path: "update-coupon/:id",
-        element: <PrivateRoute>
+        element: <AdminRoute>
           <UpdateCoupon></UpdateCoupon>
-        </PrivateRoute>
+        </AdminRoute>
       }
     ]
   }

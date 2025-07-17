@@ -118,7 +118,7 @@ const Login = () => {
 
            <p className="text-sm text-center text-white mt-4">
             Don't have an account?{' '}
-            <Link to="/register">
+            <Link state={{ from }} to="/register">
             <span className="text-purple-600 font-semibold cursor-pointer hover:underline">
               Register here
             </span>
@@ -132,3 +132,5 @@ const Login = () => {
 };
 
 export default Login;
+
+
