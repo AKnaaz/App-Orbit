@@ -22,9 +22,9 @@ const AddProduct = () => {
   const navigate = useNavigate();
 
   const [userProducts, setUserProducts] = useState([]);
-  const [isSubscribed, setIsSubscribed] = useState(false); // 🔥 fresh check
+  const [isSubscribed, setIsSubscribed] = useState(false);
 
-  // 🟡 Get real-time subscription info
+  // Get real-time subscription info
   useEffect(() => {
     if (user?.email) {
       axiosSecure.get(`/user/${user.email}`)
@@ -34,7 +34,7 @@ const AddProduct = () => {
     }
   }, [user, axiosSecure]);
 
-  // 🟡 Check user's existing products
+  //Check user's existing products
   useEffect(() => {
     if (user?.email) {
       axiosSecure.get(`/products?email=${user.email}`)
@@ -52,7 +52,7 @@ const AddProduct = () => {
 
   const onSubmit = data => {
 
-    // 🔒 Restriction if not subscribed and already added 1
+    //Restriction if not subscribed and already added 1
     if (!isSubscribed && userProducts.length >= 1) {
       return Swal.fire({
         icon: 'warning',

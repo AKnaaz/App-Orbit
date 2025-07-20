@@ -37,12 +37,6 @@ const Navbar = () => {
                     </ul>
                 </div>
                 <Logo></Logo>
-                {/* <NavLink to="/">
-                    <div className="flex items-center gap-1">
-                        <img className="w-8 rounded-full" src={logo} alt="Logo" />
-                        <span className="font text-2xl font-bold text-purple-500">AppOrbit</span>
-                    </div>
-                </NavLink> */}
             </div>
 
             <div className="navbar-center hidden lg:flex">

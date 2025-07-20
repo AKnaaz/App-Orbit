@@ -27,7 +27,7 @@ const ManageUsers = () => {
         text: 'User is now an Admin.',
         confirmButtonColor: '#7c3aed'
       });
-      refetch(); // Optional: React Query use করলে
+      refetch();
     }
   } catch (error) {
     console.error("Failed to make admin:", error);
@@ -51,7 +51,7 @@ const handleMakeModerator = async (id) => {
         text: 'User is now a moderator.',
         confirmButtonColor: '#7c3aed'
       });
-      refetch(); // Optional: React Query use করলে
+      refetch();
     }
   } catch (error) {
     console.error("Failed to make moderator:", error);
@@ -84,9 +84,6 @@ const handleMakeModerator = async (id) => {
               <td className="px-6 py-4 font-medium">{user.name || 'N/A'}</td>
               <td className="px-6 py-4">{user.email}</td>
               <td className="px-6 py-4">
-                {/* <button className="btn btn-xs bg-blue-600 text-white hover:bg-blue-700 rounded">
-                  Make Moderator
-                </button> */}
                 <button
                     onClick={() => handleMakeModerator(user._id)}
                     className={`btn btn-xs text-white rounded ${

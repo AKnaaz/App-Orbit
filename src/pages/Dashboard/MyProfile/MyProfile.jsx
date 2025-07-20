@@ -33,7 +33,6 @@ const MyProfile = () => {
         name: user.displayName,
         email: user.email,
         photo: user.photoURL,
-        // role: user.role,
         isSubscribed: false, 
       };
 
