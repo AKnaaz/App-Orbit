@@ -5,7 +5,7 @@ const useAxiosSecure = () => {
   const { user } = useAuth();
 
   const axiosSecure = axios.create({
-    baseURL: `http://localhost:3000`
+    baseURL: `https://my-twelve-assignment-server.vercel.app`
   });
 
 
