@@ -1,12 +1,43 @@
-# React + Vite
+# AppOrbit - Client Side
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+AppOrbit is a full-stack MERN project inspired by Product Hunt. This is the **client-side** application built with React, Tailwind CSS, DaisyUI, Firebase, and Stripe.
 
-Currently, two official plugins are available:
+## 🌐 Live Site
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+🔗 [Visit the Live Client Site](https://my-twelve-assignment-a7eed.web.app)
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 🚀 Features
+
+- 🔐 Firebase Authentication (Email/Password + Google Login)
+- 👥 Role-based Access: User, Moderator, Admin
+- ➕ Add / Update / Delete Products (with limit for unsubscribed users)
+- 🌟 Featured & Trending Products
+- 👍 Upvote Functionality (1 vote per user)
+- 📝 Product Reviews with Ratings
+- ⚠️ Report Product Button
+- 💳 Stripe Payment Integration (with Coupon Support)
+- 📦 Subscription Unlocks Unlimited Product Uploads
+- 🧾 Apply Discount Coupons
+- 📊 Dynamic Dashboards for:
+  - Users (My Products, Add Product)
+  - Moderators (Product Review Queue, Reports)
+  - Admins (Manage Users, Coupons, Stats)
+- 🎨 TailwindCSS + DaisyUI Styling
+
+---
+
+## 🛠️ Tech Stack
+
+| Area              | Technology Used                                      |
+|-------------------|------------------------------------------------------|
+| Frontend          | React, React Router DOM, TailwindCSS, DaisyUI        |
+| State Management  | TanStack React Query                                 |
+| Auth              | Firebase Authentication                              |
+| Backend Calls     | Axios + Firebase JWT Token                           |
+| Payments          | Stripe Elements (with Coupon Code support)           |
+| Alerts & UI       | SweetAlert2, React Icons, Framer Motion              |
+
+---
+
