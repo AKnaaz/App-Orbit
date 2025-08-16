@@ -6,11 +6,13 @@ import { motion } from 'framer-motion';
 import useAuth from '../../../hooks/useAuth';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
+import Loading from '../../shared/Loading/Loading';
 
 dayjs.extend(relativeTime);
 
 const TrendingProducts = () => {
   const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
   const axiosSecure = useAxiosSecure();
   const navigate = useNavigate();
   const { user } = useAuth();
@@ -22,6 +24,7 @@ const TrendingProducts = () => {
           .sort((a, b) => (b.votes || 0) - (a.votes || 0))
           .slice(0, 4);
         setProducts(sortedByVotes);
+        setLoading(false);
       });
   }, [axiosSecure]);
 
@@ -60,6 +63,8 @@ const TrendingProducts = () => {
       console.error("Vote failed:", error);
     }
   };
+
+  if (loading) return <Loading></Loading>;
 
   return (
     <div className="py-12 px-4 md:px-16 min-h-screen">

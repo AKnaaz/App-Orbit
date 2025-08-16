@@ -15,7 +15,7 @@ const Products = () => {
   const [page, setPage] = useState(1);
   const [totalProducts, setTotalProducts] = useState(0);
 
-  const limit = 6;
+  const limit = 8;
   const totalPages = Math.ceil(totalProducts / limit);
 
   const axiosSecure = useAxiosSecure();
@@ -62,57 +62,60 @@ const Products = () => {
   );
 
   return (
-    <div className="py-10 px-4 md:px-10 min-h-screen"
-      style={{
-        background: "linear-gradient(90deg, #0B1120 0%, #1E1B4B 40%, #3B0764 70%, #7C3AED 100%)"
-      }}
-    >
+    <div className="py-10 px-4 md:px-16 min-h-screen">
       <div className="max-w-md mx-auto mb-16 border rounded">
         <input
           type="text"
           placeholder="Search products..."
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          className="w-full px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-600"
+          className="w-full px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-[#FF8000]"
         />
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
         {filteredProducts.length > 0 ? (
           filteredProducts.map((product, index) => (
             <motion.div
               key={product._id}
-              className="rounded-lg shadow-lg overflow-hidden border hover:shadow-2xl transition duration-300 cursor-pointer"
+              className="rounded-lg shadow-lg overflow-hidden hover:shadow-2xl transition duration-300 cursor-pointer"
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1, duration: 0.5 }}
             >
-              <img src={product.productImage} alt={product.productName} className="w-full h-48 bg-black" />
+              <img src={product.productImage} alt={product.productName} className="w-full h-48" />
               <div className="p-4">
                 <h3
                   onClick={() => handleProductClick(product._id)}
-                  className="text-xl font-bold text-white hover:underline mb-2"
+                  className="text-xl font-bold hover:underline mb-2 cursor-pointer"
                 >
                   {product.productName}
                 </h3>
-                <div className="flex flex-wrap gap-2 mb-4">
-                  {product.tags.map((tag, i) => (
-                    <span key={i} className="bg-white text-pink-500 px-2 py-1 rounded-full text-xs font-medium">
+                <p className='text-sm'>{product.description}</p>
+
+                <div className="flex flex-wrap gap-2 mt-4">
+                  {product.tags?.map((tag, idx) => (
+                    <span
+                      key={idx}
+                      className="px-2 py-1 bg-[#FF8000] text-white text-xs rounded-full"
+                    >
                       #{tag}
                     </span>
                   ))}
                 </div>
-                <div className="flex justify-between items-center">
+                
+                <div className="flex justify-between items-center mt-4">
                   <button
                     onClick={() => handleUpvote(product)}
-                    className="flex items-center gap-2 px-4 py-1 bg-pink-600 text-white rounded hover:bg-pink-800 justify-center"
+                    className="flex items-center gap-2 btn bg-[#FF8000] text-white rounded hover:bg-[#d17212] justify-center"
                   >
                     <AiTwotoneLike />
                     <span>{product.votes || 0} Upvotes</span>
                   </button>
-                  <p className="text-sm text-gray-300 font-bold">
-                    {dayjs(product.createdAt).fromNow()}
-                  </p>
+                  
+                  <button 
+                  onClick={() => handleProductClick(product._id)} 
+                  className='btn bg-[#FF8000] text-white rounded hover:bg-[#d17212]'>View Details</button>
                 </div>
               </div>
             </motion.div>
@@ -129,7 +132,7 @@ const Products = () => {
             <button
               key={i}
               onClick={() => setPage(i + 1)}
-              className={`px-4 py-2 rounded ${page === i + 1 ? 'bg-purple-700 text-white' : 'bg-gray-200 text-black'}`}
+              className={`px-4 py-2 rounded ${page === i + 1 ? 'bg-[#FF8000] text-white' : 'bg-gray-200 text-black'}`}
             >
               {i + 1}
             </button>
