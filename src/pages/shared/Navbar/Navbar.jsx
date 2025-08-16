@@ -10,6 +10,7 @@ const Navbar = () => {
         <>
             <li><NavLink to="/">Home</NavLink></li>
             <li><NavLink to="/products">Products</NavLink></li>
+            <li><NavLink to="/about">About Us</NavLink></li>
         </>
     );
 
@@ -20,11 +21,7 @@ const Navbar = () => {
     };
 
     return (
-        <div className="navbar shadow-sm"
-            style={{
-                background: "linear-gradient(90deg, #0B1120 0%, #1E1B4B 40%, #3B0764 70%, #7C3AED 100%)"
-            }}
-        >
+        <div className="navbar shadow-sm bg-[#FF8000] md:px-16">
             <div className="navbar-start">
                 <div className="dropdown">
                     <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -32,7 +29,7 @@ const Navbar = () => {
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" />
                         </svg>
                     </div>
-                    <ul tabIndex={0} className="menu menu-sm dropdown-content bg-base-100 rounded-box z-10 mt-3 w-52 p-2 shadow text-purple-500">
+                    <ul tabIndex={0} className="menu menu-sm dropdown-content bg-[#FF8000] rounded-box z-10 mt-3 w-52 p-2 shadow">
                         {navItems}
                     </ul>
                 </div>
@@ -40,7 +37,7 @@ const Navbar = () => {
             </div>
 
             <div className="navbar-center hidden lg:flex">
-                <ul className="menu menu-horizontal px-1 text-purple-500">
+                <ul className="menu menu-horizontal px-1">
                     {navItems}
                 </ul>
             </div>
@@ -54,8 +51,8 @@ const Navbar = () => {
                                     <img src={user.photoURL || "https://i.ibb.co/6J8RHpm/user.png"} alt="Profile" />
                                 </div>
                             </div>
-                            <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
-                                <li><span className="font-bold text-purple-700">{user.displayName || 'User'}</span></li>
+                            <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-[#FF8000] rounded-box w-52">
+                                <li><span className="font-bold">{user.displayName || 'User'}</span></li>
                                 <li><NavLink to="/dashboard">Dashboard</NavLink></li>
                                 <li><button onClick={handleLogout}>Logout</button></li>
                             </ul>
@@ -63,10 +60,10 @@ const Navbar = () => {
                     ) : (
                         <>
                             <NavLink to="/login">
-                                <button className="btn btn-outline text-white rounded-3xl font-bold hover:bg-white hover:text-purple-900">Login</button>
+                                <button className="btn btn-outline rounded-3xl font-bold">Login</button>
                             </NavLink>
                             <NavLink to="/register">
-                                <button className="btn btn-outline text-white rounded-3xl font-bold hover:bg-white hover:text-purple-900">Register</button>
+                                <button className="btn btn-outline rounded-3xl font-bold">Register</button>
                             </NavLink>
                         </>
                     )

@@ -9,12 +9,12 @@ import CouponSlider from '../../Dashboard/CouponSlider/CouponSlider';
 const Home = () => {
     return (
         <div>
-           <Banner></Banner>
+           {/* <Banner></Banner>
            <FeaturedProducts></FeaturedProducts>
            <TrendingProducts></TrendingProducts>
            <CouponSlider></CouponSlider>
            <TopDevelopers></TopDevelopers>
-           <CommunityTestimonials></CommunityTestimonials>
+           <CommunityTestimonials></CommunityTestimonials> */}
         </div>
     );
 };

@@ -7,12 +7,8 @@ const Footer = () => {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="text-purple-400"
-      style={{
-        background: "linear-gradient(90deg, #0B1120 0%, #1E1B4B 40%, #3B0764 70%, #7C3AED 100%)"
-      }}
-    >
-      <div className="footer p-5 mx-auto">
+    <footer>
+      <div className="footer p-5 md:px-16">
         {/* Logo Section */}
         <div>
           <Logo></Logo>
@@ -44,7 +40,7 @@ const Footer = () => {
 
 
       {/* Bottom Footer */}
-      <div className="footer footer-center p-4 text-purple-400">
+      <div className="footer footer-center p-4">
         <p>© {year} AppOrbit. All rights reserved.</p>
       </div>
     </footer>

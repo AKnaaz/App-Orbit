@@ -22,6 +22,8 @@ import UpdateCoupon from "../pages/Dashboard/UpdateCoupon/UpdateCoupon";
 import AdminRoute from "../routes/AdminRoute";
 import ModeratorRoute from "../routes/ModeratorRoute";
 import UserRoute from "../routes/UserRoute";
+import AboutUs from "../pages/AboutUs/AboutUs";
+import TermsPrivacy from "../pages/TermsPrivacy/TermsPrivacy";
 
 
 export const router = createBrowserRouter([
@@ -51,6 +53,14 @@ export const router = createBrowserRouter([
         {
           path: "/products",
           Component: Products
+        },
+        {
+          path: "/about",
+          Component: AboutUs
+        },
+        {
+          path: "/terms",
+          Component: TermsPrivacy
         }
     ]
   },
