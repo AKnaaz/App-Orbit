@@ -24,6 +24,7 @@ import ModeratorRoute from "../routes/ModeratorRoute";
 import UserRoute from "../routes/UserRoute";
 import AboutUs from "../pages/AboutUs/AboutUs";
 import TermsPrivacy from "../pages/TermsPrivacy/TermsPrivacy";
+import Contact from "../pages/Contact/Contact";
 
 
 export const router = createBrowserRouter([
@@ -61,6 +62,10 @@ export const router = createBrowserRouter([
         {
           path: "/terms",
           Component: TermsPrivacy
+        },
+        {
+          path: "/contact",
+          Component: Contact
         }
     ]
   },

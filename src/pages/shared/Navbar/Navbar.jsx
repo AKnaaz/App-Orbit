@@ -11,6 +11,14 @@ const Navbar = () => {
             <li><NavLink to="/">Home</NavLink></li>
             <li><NavLink to="/products">Products</NavLink></li>
             <li><NavLink to="/about">About Us</NavLink></li>
+            {
+                user && (
+                    <>
+                        <li><NavLink to="/dashboard">Dashboard</NavLink></li>
+                        <li><NavLink to="/dashboard/add-product">Add Product</NavLink></li>
+                    </>
+                )
+            }
         </>
     );
 
@@ -21,7 +29,7 @@ const Navbar = () => {
     };
 
     return (
-        <div className="navbar shadow-sm bg-[#FF8000] md:px-16">
+        <div className="navbar shadow-sm bg-[#FF8000] md:px-16 sticky top-0 z-50">
             <div className="navbar-start">
                 <div className="dropdown">
                     <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">

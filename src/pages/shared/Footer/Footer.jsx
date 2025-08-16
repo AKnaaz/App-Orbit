@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaFacebook, FaInstagramSquare, FaYoutube } from 'react-icons/fa';
+import { FaFacebook, FaInstagramSquare, FaLinkedin, FaTwitterSquare, FaYoutube } from 'react-icons/fa';
 import { Link } from 'react-router';
 import Logo from '../Logo/Logo';
 
@@ -33,7 +33,8 @@ const Footer = () => {
             <div className="grid grid-flow-col gap-4">
                 <a href="https://www.facebook.com/anmoon.islam.31"><FaFacebook className='text-blue-400' size={25}/></a>
                 <a href="https://www.instagram.com/?hl=en"><FaInstagramSquare className='text-pink-400' size={25}/></a>
-                <a href="https://www.youtube.com/"><FaYoutube className='text-red-500' size={25}/></a>
+                <a href="https://x.com/Moontahasafiq"><FaTwitterSquare className='text-black' size={25}/></a>
+                <a href="https://www.linkedin.com/in/nazatakter-dev"><FaLinkedin className='text-blue-400' size={25}/></a>
             </div>
         </div>
       </div>

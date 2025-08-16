@@ -9,8 +9,8 @@ import CouponSlider from '../../Dashboard/CouponSlider/CouponSlider';
 const Home = () => {
     return (
         <div>
-           {/* <Banner></Banner>
-           <FeaturedProducts></FeaturedProducts>
+           <Banner></Banner>
+           {/* <FeaturedProducts></FeaturedProducts>
            <TrendingProducts></TrendingProducts>
            <CouponSlider></CouponSlider>
            <TopDevelopers></TopDevelopers>
