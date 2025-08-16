@@ -84,7 +84,7 @@ const FeaturedProducts = () => {
         {products.map((product, index) => (
           <motion.div
             key={product._id}
-            className="rounded-lg shadow-lg overflow-hidden border hover:shadow-2xl transition duration-300"
+            className="rounded-lg shadow-lg overflow-hidden hover:shadow-2xl transition duration-300"
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: index * 0.1, duration: 0.5 }}
@@ -96,17 +96,8 @@ const FeaturedProducts = () => {
                   className="text-xl font-bold hover:underline mb-2">
                   {product.productName}
                 </h3>
-              <div className="flex flex-wrap gap-2 mb-4">
-                {product.tags?.map((tag, index) => (
-                  <span
-                    key={index}
-                    className="px-2 py-1 rounded-full text-xs font-medium"
-                  >
-                    #{tag}
-                  </span>
-                ))}
-              </div>
-              <div className='flex justify-between items-center'>
+                <p>{product.description}</p>
+              <div className='flex justify-between items-center mt-4'>
                 <button
                   onClick={() => handleUpvote(product)}
                   disabled={false}
