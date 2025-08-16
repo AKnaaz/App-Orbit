@@ -96,20 +96,20 @@ const FeaturedProducts = () => {
                   className="text-xl font-bold hover:underline mb-2">
                   {product.productName}
                 </h3>
-                <p>{product.description}</p>
+                <p className='text-sm'>{product.description}</p>
               <div className='flex justify-between items-center mt-4'>
                 <button
                   onClick={() => handleUpvote(product)}
                   disabled={false}
-                  className="flex items-center gap-2 px-4 py-1 bg-[#FF8000] text-white rounded hover:bg-[#d17212] justify-center"
+                  className="flex items-center gap-2 btn bg-[#FF8000] text-white rounded hover:bg-[#d17212] justify-center"
                 >
                   <AiTwotoneLike />
                   <span>{product.votes || 0} Upvotes</span>
                 </button>
 
-                <p className="text-sm font-bold">
-                 {dayjs(product.createdAt).fromNow()}
-                </p>
+                <button 
+                onClick={() => handleProductClick(product._id)} 
+                className='btn bg-[#FF8000] text-white rounded hover:bg-[#d17212]'>View Details</button>
               </div>
             </div>
           </motion.div>
