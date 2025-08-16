@@ -93,7 +93,7 @@ const FeaturedProducts = () => {
             <div className="p-4">
                 <h3
                   onClick={() => handleProductClick(product._id)}
-                  className="text-xl font-bold hover:underline mb-2">
+                  className="text-xl font-bold hover:underline mb-2 cursor-pointer">
                   {product.productName}
                 </h3>
                 <p className='text-sm'>{product.description}</p>
