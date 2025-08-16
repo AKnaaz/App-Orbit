@@ -6,12 +6,14 @@ import { motion } from 'framer-motion';
 import useAuth from '../../../hooks/useAuth';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
+import Loading from '../../shared/Loading/Loading';
 
 
 dayjs.extend(relativeTime);
 
 const FeaturedProducts = () => {
   const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
   const axiosSecure = useAxiosSecure();
   const navigate = useNavigate();
   console.log(navigate)
@@ -24,7 +26,9 @@ const FeaturedProducts = () => {
         .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
         .slice(0, 4);
       setProducts(sorted);
-    });
+      setLoading(false);
+    })
+    .catch(() => setLoading(false));
 }, [axiosSecure]);
 
 
@@ -68,15 +72,15 @@ const FeaturedProducts = () => {
     }
   };
 
-  return (
-    <div className="py-24 px-4 md:px-10 min-h-screen"
-      style={{
-        background: "linear-gradient(90deg, #0B1120 0%, #1E1B4B 40%, #3B0764 70%, #7C3AED 100%)"
-      }}
-    >
-      <h2 className="text-3xl font-bold text-center text-purple-700 my-10">Featured Products</h2>
+  if (loading) {
+    return <Loading></Loading>;
+  }
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+  return (
+    <div className="py-12 px-4 md:px-16 min-h-screen">
+      <h2 className="text-3xl font-bold text-center mb-16">Featured Products</h2>
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
         {products.map((product, index) => (
           <motion.div
             key={product._id}
@@ -85,18 +89,18 @@ const FeaturedProducts = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: index * 0.1, duration: 0.5 }}
           >
-            <img src={product.productImage} alt={product.productName} className="w-full h-48 bg-black" />
+            <img src={product.productImage} alt={product.productName} className="w-full h-48" />
             <div className="p-4">
                 <h3
                   onClick={() => handleProductClick(product._id)}
-                  className="text-xl font-bold text-white hover:underline mb-2">
+                  className="text-xl font-bold hover:underline mb-2">
                   {product.productName}
                 </h3>
               <div className="flex flex-wrap gap-2 mb-4">
                 {product.tags?.map((tag, index) => (
                   <span
                     key={index}
-                    className="bg-white text-pink-500 px-2 py-1 rounded-full text-xs font-medium"
+                    className="px-2 py-1 rounded-full text-xs font-medium"
                   >
                     #{tag}
                   </span>
@@ -106,13 +110,13 @@ const FeaturedProducts = () => {
                 <button
                   onClick={() => handleUpvote(product)}
                   disabled={false}
-                  className="flex items-center gap-2 px-4 py-1 bg-pink-600 text-white rounded hover:bg-pink-800 justify-center"
+                  className="flex items-center gap-2 px-4 py-1 bg-[#FF8000] text-white rounded hover:bg-[#d17212] justify-center"
                 >
                   <AiTwotoneLike />
                   <span>{product.votes || 0} Upvotes</span>
                 </button>
 
-                <p className="text-sm text-gray-300 font-bold">
+                <p className="text-sm font-bold">
                  {dayjs(product.createdAt).fromNow()}
                 </p>
               </div>
