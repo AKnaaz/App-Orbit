@@ -1,5 +1,4 @@
 import React from 'react';
-import bgImage from '../../../assets/login.jpg';
 import { Link, useLocation, useNavigate } from 'react-router';
 import SocialLogin from '../SocialLogin/SocialLogin';
 import { useForm } from 'react-hook-form';

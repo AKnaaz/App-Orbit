@@ -1,5 +1,5 @@
 import React from 'react';
-import bannerImage from '../../../assets/banner2.jpg'; 
+import bannerImage from '../../../assets/banner3.webp'; 
 import { Link } from 'react-router';
 import { motion } from 'framer-motion';
 

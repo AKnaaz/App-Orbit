@@ -5,7 +5,7 @@ import { useQuery } from '@tanstack/react-query';
 import Swal from 'sweetalert2';
 import useAxiosSecure from '../../../hooks/useAxiosSecure';
 import Loading from '../../shared/Loading/Loading';
-import img from '../../../assets/updateCoupon.jpg';
+
 
 const UpdateCoupon = () => {
   const { id } = useParams();

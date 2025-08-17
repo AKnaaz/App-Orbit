@@ -3,7 +3,6 @@ import useAuth from '../../../hooks/useAuth';
 import { FaCheckCircle, FaEnvelope, FaFacebook, FaInstagramSquare, FaLinkedin, FaMapMarkerAlt, FaPhoneAlt, FaTwitterSquare, FaUserCircle } from 'react-icons/fa';
 import { IoMail } from 'react-icons/io5';
 import { AiOutlineCrown } from 'react-icons/ai';
-import profileBg from '../../../assets/bridge.jpg';
 import { useNavigate } from 'react-router';
 import useAxiosSecure from '../../../hooks/useAxiosSecure';
 import { useQuery } from '@tanstack/react-query';
