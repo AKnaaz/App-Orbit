@@ -4,7 +4,7 @@ import Slider from 'react-slick';
 import useAxiosSecure from '../../../hooks/useAxiosSecure';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import cardImg from '../../../assets/coupon.jpg'
+import cardImg from '../../../assets/card2.jpeg'
 
 const CouponSlider = () => {
   const axiosSecure = useAxiosSecure();
@@ -35,12 +35,8 @@ const CouponSlider = () => {
   };
 
   return (
-    <div className="py-12 px-4 md:px-10"
-  style={{
-    background: "linear-gradient(90deg, #0B1120 0%, #1E1B4B 40%, #3B0764 70%, #7C3AED 100%)"
-  }}
->
-  <h2 className="text-3xl font-bold mb-4 text-center text-purple-600">Exclusive Coupons</h2>
+    <div className="py-12 px-4 md:px-16">
+  <h2 className="text-3xl font-bold mb-4 text-center">Exclusive Coupons</h2>
   <Slider {...settings}>
     {coupons.map(coupon => (
       <div key={coupon._id} className="flex justify-center">

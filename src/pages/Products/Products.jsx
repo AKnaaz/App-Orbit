@@ -121,7 +121,7 @@ const Products = () => {
             </motion.div>
           ))
         ) : (
-          <p className="text-white text-center col-span-full">No products found.</p>
+          <p className="text-center col-span-full">No products found.</p>
         )}
       </div>
 
