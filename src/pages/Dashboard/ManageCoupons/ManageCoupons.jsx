@@ -5,7 +5,7 @@ import Swal from 'sweetalert2';
 import useAxiosSecure from '../../../hooks/useAxiosSecure';
 import { FaEdit, FaTrash } from 'react-icons/fa';
 import { Link } from 'react-router';
-import cardImg from '../../../assets/card.webp'
+import cardImg from '../../../assets/card.jpg'
 
 const ManageCoupons = () => {
   const axiosSecure = useAxiosSecure();
@@ -54,16 +54,12 @@ const ManageCoupons = () => {
   };
 
   return (
-    <div className="py-20 px-4 md:px-10 min-h-screen"
-    style={{
-        background: "linear-gradient(90deg, #0B1120 0%, #1E1B4B 40%, #3B0764 70%, #7C3AED 100%)"
-      }}
-    >
-      <h2 className="text-2xl font-bold text-center text-purple-600 mb-10">Manage Coupons</h2>
+    <div className="py-20 px-4 md:px-10 min-h-screen">
+      <h2 className="text-2xl font-bold text-center mb-10">Manage Coupons</h2>
 
       {/* Add Coupon Form */}
       <form onSubmit={handleSubmit(onSubmit)} 
-      className="space-y-4 p-10 rounded-xl shadow-md shadow-blue-900 mb-10"
+      className="space-y-4 p-10 rounded-xl shadow-md mb-10"
       style={{
         backgroundImage: `url(${cardImg})`,
         backgroundPosition: 'center',
@@ -80,13 +76,13 @@ const ManageCoupons = () => {
 
           <input {...register("discount", { required: true })} type="number" className="input input-bordered rounded bg-gradient-to-r from-[#DFBD69] to-[#926F34] placeholder:text-gray-500" placeholder="Discount Amount" />
         </div>
-        <button type="submit" className="btn bg-blue-950 w-full">Add Coupon</button>
+        <button type="submit" className="btn bg-[#FF8000] text-white w-full">Add Coupon</button>
       </form>
 
       {/* Coupon Table */}
-      <div className="overflow-x-auto border rounded-lg border-[#423d92] shadow-md">
+      <div className="overflow-x-auto border rounded-lg border-[#FF8000] shadow-md">
         <table className="table">
-          <thead className="bg-gradient-to-r from-[#1e3d8d] via-[#1E1B4B] to-[#3B0764] text-white uppercase text-xs font-bold">
+          <thead className="bg-gradient-to-r from-[#FF8000] via-[#d88028] to-[#cea073] uppercase text-xs font-bold">
             <tr>
               <th>Code</th>
               <th>Expiry</th>
@@ -106,11 +102,11 @@ const ManageCoupons = () => {
                   {/* Update Link to separate update page */}
                   <Link
                     to={`/dashboard/update-coupon/${coupon._id}`}
-                    className="btn bg-[#292466] text-white rounded transition-all duration-200"
+                    className="btn bg-[#FF8000] text-white rounded transition-all duration-200"
                   >
                     <FaEdit></FaEdit>
                   </Link>
-                  <button className="btn bg-[#292466] text-white rounded transition-all duration-200" onClick={() => handleDelete(coupon._id)}>
+                  <button className="btn bg-[#FF8000] text-white rounded transition-all duration-200" onClick={() => handleDelete(coupon._id)}>
                     <FaTrash />
                   </button>
                 </td>
