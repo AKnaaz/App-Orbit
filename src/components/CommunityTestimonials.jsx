@@ -50,32 +50,28 @@ const testimonialsBottom = [
 
 const CommunityTestimonials = () => {
   return (
-    <div className="py-24 px-4 md:px-10 lg:px-20 text-white text-center"
-      style={{
-        background: "linear-gradient(90deg, #0B1120 0%, #1E1B4B 40%, #3B0764 70%, #7C3AED 100%)"
-      }}
-    >
-      <h2 className="text-3xl font-bold text-center text-purple-700 my-10">Community Testimonials</h2>
+    <div className="py-12 px-4 md:px-16 text-center">
+      <h2 className="text-3xl font-bold text-center mb-16">Community Testimonials</h2>
 
       {/* Top Marquee */}
       <Marquee speed={40} pauseOnHover gradient={false} className="mb-6">
         {testimonialsTop.map((t, index) => (
           <div
             key={index}
-            className="mx-4 p-6 rounded-lg min-w-[270px] shadow-2xl flex flex-col items-center text-center border border-purple-800"
+            className="mx-4 p-6 rounded-lg min-w-[270px] shadow-2xl flex flex-col items-center text-center border border-[#FF8000]"
           >
             <img
               src={t.img}
               alt={t.name}
-              className="w-16 h-16 rounded-full object-cover mb-3 border-2 border-purple-800"
+              className="w-16 h-16 rounded-full object-cover mb-3 border-2 border-[#FF8000]"
             />
             <div className="flex text-yellow-400 mb-2">
               {[...Array(5)].map((_, i) => (
                 <FaStar key={i} />
               ))}
             </div>
-            <p className="italic text-purple-500 mb-2">"{t.feedback}"</p>
-            <h4 className="font-semibold text-purple-500">— {t.name}</h4>
+            <p className="italic mb-2">"{t.feedback}"</p>
+            <h4 className="font-semibold">— {t.name}</h4>
           </div>
         ))}
       </Marquee>
@@ -91,20 +87,20 @@ const CommunityTestimonials = () => {
         {testimonialsBottom.map((t, index) => (
           <div
             key={index}
-            className="mx-4 p-6 rounded-lg min-w-[270px] shadow-md flex flex-col items-center text-center border border-purple-800"
+            className="mx-4 p-6 rounded-lg min-w-[270px] shadow-md flex flex-col items-center text-center border border-[#FF8000]"
           >
             <img
               src={t.img}
               alt={t.name}
-              className="w-16 h-16 rounded-full object-cover mb-3 border-2 border-purple-500"
+              className="w-16 h-16 rounded-full object-cover mb-3 border-2 border-[#FF8000]"
             />
             <div className="flex text-yellow-400 mb-2">
               {[...Array(5)].map((_, i) => (
                 <FaStar key={i} />
               ))}
             </div>
-            <p className="italic text-purple-500 mb-2">"{t.feedback}"</p>
-            <h4 className="font-semibold text-purple-500">— {t.name}</h4>
+            <p className="italic mb-2">"{t.feedback}"</p>
+            <h4 className="font-semibold">— {t.name}</h4>
           </div>
         ))}
       </Marquee>

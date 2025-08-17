@@ -5,6 +5,7 @@ import CommunityTestimonials from '../../../components/CommunityTestimonials';
 import FeaturedProducts from '../FeaturedProducts/FeaturedProducts';
 import TrendingProducts from '../TrendingProducts/TrendingProducts';
 import CouponSlider from '../../Dashboard/CouponSlider/CouponSlider';
+import HowItWorks from '../../../components/HowItWorks';
 
 const Home = () => {
     return (
@@ -13,8 +14,9 @@ const Home = () => {
            <FeaturedProducts></FeaturedProducts>
            <TrendingProducts></TrendingProducts>
            <CouponSlider></CouponSlider>
+           <HowItWorks></HowItWorks>
            <TopDevelopers></TopDevelopers>
-           {/* <CommunityTestimonials></CommunityTestimonials> */}
+           <CommunityTestimonials></CommunityTestimonials>
         </div>
     );
 };
