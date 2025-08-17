@@ -136,11 +136,11 @@ const ProductDetails = () => {
 
         {/* === PRODUCT CARD === */}
         <div className="rounded-lg shadow-lg overflow-hidden">
-            <div className="w-full h-64 flex justify-center items-center overflow-hidden">
+            <div className="w-full flex justify-center items-center overflow-hidden">
               <img
                 src={product.productImage}
                 alt={product.productName}
-                className="w-full h-full object-contain"
+                className="w-full h-auto object-cover"
               />
             </div>     
             <div className="p-6 space-y-4">
@@ -153,11 +153,6 @@ const ProductDetails = () => {
               ))}
             </div>
             <p>{product.description}</p>
-            {product.externalLink && (
-              <a href={product.externalLink} target="_blank" rel="noopener noreferrer" className="underline">
-                Visit Product
-              </a>
-            )}
             <div className="flex items-center gap-4 mt-4">
               <button
                 onClick={handleUpvote}

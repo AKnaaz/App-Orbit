@@ -72,6 +72,7 @@ const Navbar = () => {
                         </g>
                     </svg>
                 </label>
+
                 {
                     user ? (
                         <div className="dropdown dropdown-end">
