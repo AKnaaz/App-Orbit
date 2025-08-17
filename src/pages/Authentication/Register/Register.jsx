@@ -88,24 +88,17 @@ const Register = () => {
 
   return (
     <div
-      className="flex items-center justify-center bg-cover bg-center px-4 py-10"
-      style={{
-        backgroundImage: `url('https://i.postimg.cc/mDW1PWLb/regi.jpg')`,
-      }}
-    >
+      className="flex items-center justify-center px-4 py-10">
       {/* Card */}
-      <div className="w-80 bg-white rounded-lg shadow-2xl overflow-hidden">
-        
-        {/* Top Image Section */}
-        <div className="h-32 bg-[url('https://i.postimg.cc/mDW1PWLb/regi.jpg')] bg-cover bg-center rounded-t-lg"></div>
+      <div className="md:w-1/2 rounded-lg shadow-2xl overflow-hidden">
 
         {/* Form */}
         <div className="px-6 py-6">
-          <h2 className="text-xl font-bold text-center text-purple-800 mb-4">Register to AppOrbit!</h2>
+          <h2 className="text-xl font-bold text-center mb-4">Register to <span className='text-[#FF8000]'>AppOrbit!</span></h2>
 
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
             <div>
-                <label className="block text-sm font-medium text-purple-700 mb-1">Name</label>
+                <label className="block text-sm font-medium mb-1">Name</label>
                 <input
                   type="text"
                   {...register('name', {
@@ -113,8 +106,7 @@ const Register = () => {
                   })}
                   placeholder="Enter Your Name"
                   className="w-full px-4 py-2 rounded border border-gray-300 
-                  focus:outline-none focus:ring-2 focus:ring-purple-400 
-                  placeholder:text-gray-400 text-gray-800"
+                  focus:outline-none focus:ring-2 focus:ring-[#FF8000]"
                  required
                 />
                 {
@@ -123,25 +115,27 @@ const Register = () => {
             </div>
 
             <div>
-                <label className="block text-sm font-medium text-purple-700 mb-1">Photo URL</label>
+                <label className="block text-sm font-medium mb-1">Photo URL</label>
                 <input
                  type="file"
                  onChange={handleImageUpload}
                  placeholder="Photo URL"
-                 className="input w-full px-4 py-2 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-400 text-gray-400 bg-white"
+                 className="input w-full px-4 py-2 rounded border border-gray-300 
+                  focus:outline-none focus:ring-2 focus:ring-[#FF8000]"
                  required
                 />
             </div>
 
             <div>
-                <label className="block text-sm font-medium text-purple-700 mb-1">Email</label>
+                <label className="block text-sm font-medium mb-1">Email</label>
                 <input
                   type="email"
                   {...register('email', {
                     required: true
                   })}
                   placeholder="Enter Your Email"
-                  className="w-full px-4 py-2 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-400 placeholder:text-gray-400 text-gray-800"
+                  className="w-full px-4 py-2 rounded border border-gray-300 
+                  focus:outline-none focus:ring-2 focus:ring-[#FF8000]"
                   required
                 />
                 {
@@ -150,7 +144,7 @@ const Register = () => {
             </div>
 
             <div>
-                <label className="block text-sm font-medium text-purple-700 mb-1">Password</label>
+                <label className="block text-sm font-medium mb-1">Password</label>
                 <input
                   type="password"
                   {...register('password' , {
@@ -162,7 +156,8 @@ const Register = () => {
                         }
                   })}
                   placeholder="Enter Your Password"
-                  className="w-full px-4 py-2 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-400 placeholder:text-gray-400 text-gray-800"
+                  className="w-full px-4 py-2 rounded border border-gray-300 
+                  focus:outline-none focus:ring-2 focus:ring-[#FF8000]"
                   required
                 />
                 {
@@ -185,15 +180,15 @@ const Register = () => {
 
             <button
               type="submit"
-              className="w-full bg-purple-600 text-white font-semibold py-2 rounded hover:bg-purple-700 transition"
+              className="w-full bg-[#FF8000] text-white font-semibold py-2 rounded hover:bg-[#d87411] transition"
             >
               Register
             </button>
 
-             <p className="text-sm text-center text-gray-500 mt-4">
+             <p className="text-sm text-center mt-4">
               Already have an account?{' '}
               <Link to="/login">
-              <a href="#" className="text-purple-600 hover:underline">Login</a>
+              <a href="#" className="text-[#FF8000] hover:underline">Login</a>
               </Link>
             </p>
           </form>

@@ -68,9 +68,9 @@ const handleMakeModerator = async (id) => {
   if(isLoading) return <Loading></Loading>
 
   return (
-    <div className="w-full overflow-x-auto rounded-xl border border-[#423d92] shadow-md">
+    <div className="w-full overflow-x-auto border border-[#FF8000] shadow-md">
       <table className="min-w-full text-sm text-left">
-        <thead className="bg-gradient-to-r from-[#1e3d8d] via-[#1E1B4B] to-[#3B0764] text-white uppercase text-xs font-bold">
+        <thead className="bg-[#FF8000] uppercase text-xs font-bold">
           <tr>
             <th className="px-6 py-3">Name</th>
             <th className="px-6 py-3">Email</th>
@@ -78,9 +78,9 @@ const handleMakeModerator = async (id) => {
             <th className="px-6 py-3">Make Admin</th>
           </tr>
         </thead>
-        <tbody className="divide-y divide-[#423d92] text-white">
+        <tbody className="divide-y divide-[#FF8000]">
           {users.map((user) => (
-            <tr key={user._id} className="hover:bg-[#1e3d8d] transition">
+            <tr key={user._id} className="hover:bg-[#FF8000] transition">
               <td className="px-6 py-4 font-medium">{user.name || 'N/A'}</td>
               <td className="px-6 py-4">{user.email}</td>
               <td className="px-6 py-4">
