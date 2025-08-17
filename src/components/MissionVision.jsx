@@ -1,3 +1,4 @@
+import React from "react";
 import { Target, Eye } from "lucide-react";
 
 const MissionVision = () => {
@@ -7,7 +8,7 @@ const MissionVision = () => {
         Our Mission & Vision
       </h2>
 
-      {/* Mission */}
+         {/* Mission */}
       <div className="rounded-2xl shadow-xl p-8 flex flex-col items-center text-center mb-8">
         <Target className="w-12 h-12 mb-4" />
         <h3 className="text-xl font-semibold mb-4">Our Mission</h3>

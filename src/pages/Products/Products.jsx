@@ -6,6 +6,7 @@ import { motion } from 'framer-motion';
 import useAuth from '../../hooks/useAuth';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
+import Loading from '../shared/Loading/Loading';
 
 dayjs.extend(relativeTime);
 
@@ -14,6 +15,7 @@ const Products = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [page, setPage] = useState(1);
   const [totalProducts, setTotalProducts] = useState(0);
+  const [loading, setLoading] = useState(true);
 
   const limit = 8;
   const totalPages = Math.ceil(totalProducts / limit);
@@ -27,7 +29,9 @@ const Products = () => {
       .then(res => {
         setProducts(res.data.products);
         setTotalProducts(res.data.total);
-      });
+        setLoading(false);
+      })
+      .catch(() => setLoading(false));
   }, [axiosSecure, page]);
 
   const handleProductClick = (id) => {
@@ -60,6 +64,10 @@ const Products = () => {
   const filteredProducts = products.filter(product =>
     product.productName.toLowerCase().includes(searchTerm.toLowerCase())
   );
+
+   if (loading) {
+    return <Loading></Loading>;
+  }
 
   return (
     <div className="py-10 px-4 md:px-16 min-h-screen">

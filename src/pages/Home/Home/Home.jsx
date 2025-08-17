@@ -7,6 +7,7 @@ import TrendingProducts from '../TrendingProducts/TrendingProducts';
 import CouponSlider from '../../Dashboard/CouponSlider/CouponSlider';
 import HowItWorks from '../../../components/HowItWorks';
 import MissionVision from '../../../components/MissionVision';
+import FAQs from '../../../components/FAQs';
 
 const Home = () => {
     return (
@@ -16,8 +17,9 @@ const Home = () => {
            <TrendingProducts></TrendingProducts>
            <CouponSlider></CouponSlider>
            <HowItWorks></HowItWorks>
-           <MissionVision></MissionVision>
            <TopDevelopers></TopDevelopers>
+           <MissionVision></MissionVision>
+           <FAQs></FAQs>
            <CommunityTestimonials></CommunityTestimonials>
         </div>
     );
