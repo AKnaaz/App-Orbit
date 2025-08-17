@@ -1,23 +1,23 @@
 import React from 'react';
 import { FaPhoneAlt, FaEnvelope, FaMapMarkerAlt, FaLinkedin, FaFacebook, FaInstagramSquare, FaTwitterSquare } from 'react-icons/fa';
 
-const ProfilePage = () => {
+const ModeratorProfile = () => {
   const user = {
-    photo: 'https://i.postimg.cc/1XV2LvM8/t3.webp',
-    name: 'Parul',
-    email: 'pa@rul.com',
-    phone: '+880 1234-567890',
-    address: 'Chittagong, Bangladesh',
-    bio: 'Parul is an experienced admin who manages the platform efficiently, oversees user activity, monitors content quality, and ensures smooth operation of all services. With a keen eye for detail and strong leadership skills, she maintains the platform’s integrity and user satisfaction.',
-    skills: ['Management', 'Content Moderation', 'Team Leadership', 'Customer Support', 'Analytics'],
+    photo: 'https://i.postimg.cc/3rtN7PQn/moderator.webp',
+    name: 'Sakib',
+    email: 'sakib@moderator.com',
+    phone: '+880 1987-654321',
+    address: 'Dhaka, Bangladesh',
+    bio: 'Sakib is a dedicated moderator who ensures fair content management, reviews user reports, and maintains community guidelines. He works closely with the admin team to create a safe and engaging platform experience for all users.',
+    skills: ['Content Review', 'Community Guidelines', 'User Support', 'Problem Solving', 'Decision Making'],
     stats: [
-      { label: 'Managed Users', value: 150 },
-      { label: 'Posts Reviewed', value: 320 },
-      { label: 'Reports Handled', value: 50 },
+      { label: 'Posts Reviewed', value: 210 },
+      { label: 'Reports Resolved', value: 120 },
+      { label: 'Warnings Issued', value: 35 },
     ],
-    joined: 'January 1, 2023',
-    lastActive: '2 days ago',
-    role: 'Admin',
+    joined: 'March 15, 2023',
+    lastActive: '5 hours ago',
+    role: 'Moderator',
   };
 
   return (
@@ -34,8 +34,8 @@ const ProfilePage = () => {
         <h2 className="text-2xl font-bold mb-2">{user.name}</h2>
 
         {/* Role Highlight */}
-        <div className="p-3 bg-yellow-100 border-l-4 border-yellow-500 text-yellow-800 font-medium mb-4 w-full md:w-3/4 mx-auto rounded-lg">
-          {user.role} Role: Oversees all user activity and moderates content.
+        <div className="p-3 bg-green-100 border-l-4 border-green-500 text-green-800 font-medium mb-4 w-full md:w-3/4 mx-auto rounded-lg">
+          {user.role} Role: Maintains community standards and reviews reported content.
         </div>
 
         {/* Bio */}
@@ -63,10 +63,10 @@ const ProfilePage = () => {
 
           {/* Social Links */}
           <div className="flex-1 flex justify-center gap-8 rounded-lg p-6 shadow-md hover:shadow-xl transition-shadow duration-300">
-            <a href="https://www.facebook.com/anmoon.islam.31"><FaFacebook className='text-blue-400' size={25}/></a>
-            <a href="https://www.instagram.com/?hl=en"><FaInstagramSquare className='text-pink-400' size={25}/></a>
-            <a href="https://x.com/Moontahasafiq"><FaTwitterSquare className='text-black' size={25}/></a>
-            <a href="https://www.linkedin.com/in/nazatakter-dev"><FaLinkedin className='text-blue-400' size={25}/></a>
+            <a href="https://www.facebook.com/"><FaFacebook className='text-blue-400' size={25}/></a>
+            <a href="https://www.instagram.com/"><FaInstagramSquare className='text-pink-400' size={25}/></a>
+            <a href="https://x.com/"><FaTwitterSquare className='text-black' size={25}/></a>
+            <a href="https://www.linkedin.com/"><FaLinkedin className='text-blue-400' size={25}/></a>
           </div>
         </div>
 
@@ -101,4 +101,4 @@ const ProfilePage = () => {
   );
 };
 
-export default ProfilePage;
+export default ModeratorProfile;

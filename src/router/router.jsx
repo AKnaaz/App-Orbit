@@ -26,6 +26,9 @@ import AboutUs from "../pages/AboutUs/AboutUs";
 import TermsPrivacy from "../pages/TermsPrivacy/TermsPrivacy";
 import Contact from "../pages/Contact/Contact";
 import ProfilePage from "../pages/Dashboard/ProfilePage/ProfilePage";
+import UserStatistics from "../pages/Dashboard/UserStatistics/UserStatistics";
+import ModeratorStatistics from "../pages/Dashboard/ModeratorStatistics/ModeratorStatistics";
+import ModeratorProfile from "../pages/Dashboard/ModeratorProfile/ModeratorProfile";
 
 
 
@@ -85,6 +88,13 @@ export const router = createBrowserRouter([
   
       },
       {
+        path: "user-statistics",
+        element: <UserRoute>
+          <UserStatistics></UserStatistics>
+        </UserRoute>
+  
+      },
+      {
         path: "payment/:email",
         element: <UserRoute>
            <Payment></Payment>
@@ -107,6 +117,18 @@ export const router = createBrowserRouter([
         element: <UserRoute>
           <Update></Update>
         </UserRoute>
+      },
+      {
+        path: "moderator-profile",
+        element: <ModeratorRoute>
+           <ModeratorProfile></ModeratorProfile>
+        </ModeratorRoute>
+      },
+      {
+        path: "moderator-statistics",
+        element: <ModeratorRoute>
+           <ModeratorStatistics></ModeratorStatistics>
+        </ModeratorRoute>
       },
       {
         path: "product-review-queue",

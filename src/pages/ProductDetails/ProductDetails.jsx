@@ -5,7 +5,6 @@ import useAuth from '../../hooks/useAuth';
 import { AiTwotoneLike } from 'react-icons/ai';
 import Swal from 'sweetalert2';
 import Loading from '../shared/Loading/Loading';
-import detailBg from '../../assets/product.jpg';
 
 const ProductDetails = () => {
   const { id } = useParams();
@@ -132,12 +131,11 @@ const ProductDetails = () => {
   if (!product) return <Loading />;
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-cover bg-center px-4 py-12"
-      style={{ backgroundImage: `url(${detailBg})` }}>
+    <div className="min-h-screen flex flex-col items-center justify-center px-4 py-12">
       <div className="max-w-xl w-full space-y-10">
 
         {/* === PRODUCT CARD === */}
-        <div className="rounded-lg shadow-lg overflow-hidden border">
+        <div className="rounded-lg shadow-lg overflow-hidden">
             <div className="w-full h-64 flex justify-center items-center overflow-hidden">
               <img
                 src={product.productImage}
@@ -146,17 +144,17 @@ const ProductDetails = () => {
               />
             </div>     
             <div className="p-6 space-y-4">
-            <h2 className="text-2xl font-bold text-white">{product.productName}</h2>
+            <h2 className="text-2xl font-bold">{product.productName}</h2>
             <div className="flex flex-wrap gap-2">
               {product.tags?.map((tag, i) => (
-                <span key={i} className="bg-pink-600 px-3 py-1 rounded-full text-sm text-white font-semibold">
+                <span key={i} className="bg-[#FF8000] px-3 py-1 rounded-full text-sm text-white font-semibold">
                   #{tag}
                 </span>
               ))}
             </div>
-            <p className="text-gray-200">{product.description}</p>
+            <p>{product.description}</p>
             {product.externalLink && (
-              <a href={product.externalLink} target="_blank" rel="noopener noreferrer" className="text-pink-500 underline">
+              <a href={product.externalLink} target="_blank" rel="noopener noreferrer" className="underline">
                 Visit Product
               </a>
             )}
@@ -166,7 +164,7 @@ const ProductDetails = () => {
                 disabled={
                   !user || user.email === product.ownerEmail || product.voters?.includes(user.email)
                 }
-                className="flex items-center gap-2 px-4 py-2 bg-pink-600 text-white rounded hover:bg-pink-700 disabled:opacity-50"
+                className="flex items-center gap-2 px-4 py-2 bg-[#FF8000] text-white rounded hover:bg-[#d6700a] disabled:opacity-50"
               >
                 <AiTwotoneLike />
                 {product.votes || 0} Upvotes
@@ -182,20 +180,20 @@ const ProductDetails = () => {
         </div>
 
         {/* === POST REVIEW SECTION === */}
-        <div className="shadow-lg rounded-lg p-6 space-y-4 border">
-          <h3 className="text-xl font-bold text-white">Post a Review</h3>
+        <div className="shadow-lg rounded-lg p-6 space-y-4">
+          <h3 className="text-xl font-bold">Post a Review</h3>
           <form onSubmit={handleReviewSubmit} className="space-y-4">
             <div className="flex items-center gap-4">
-              <img src={user.photoURL} alt={user.displayName} className="w-12 h-12 rounded-full border-2 border-white" />
+              <img src={user.photoURL} alt={user.displayName} className="w-12 h-12 rounded-full" />
               <input
                 type="text"
                 value={user.displayName}
                 readOnly
-                className="w-full px-4 py-2 border rounded border-white"
+                className="w-full px-4 py-2 rounded border"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-black">Your Review</label>
+              <label className="block text-sm font-medium">Your Review</label>
               <textarea
                 value={reviewText}
                 onChange={(e) => setReviewText(e.target.value)}
@@ -205,7 +203,7 @@ const ProductDetails = () => {
               ></textarea>
             </div>
             <div>
-              <label className="block text-sm font-medium text-black mb-1">Your Rating</label>
+              <label className="block text-sm font-medium mb-1">Your Rating</label>
               <div className="flex gap-1">
                 {[1, 2, 3, 4, 5].map((num) => (
                   <span
@@ -218,7 +216,7 @@ const ProductDetails = () => {
                 ))}
               </div>
             </div>
-            <button type="submit" className="btn w-full bg-pink-600 text-white py-2 rounded hover:bg-pink-700">
+            <button type="submit" className="btn w-full bg-[#FF8000] text-white py-2 rounded hover:bg-[#d6700a]">
               Submit Review
             </button>
           </form>
@@ -227,12 +225,12 @@ const ProductDetails = () => {
         {/* === REVIEWS LIST === */}
         <div className="space-y-4">
           {reviews.map((review) => (
-            <div key={review._id} className="rounded-lg p-4 shadow border">
+            <div key={review._id} className="rounded-lg p-4 shadow">
               <div className="flex items-center gap-3 mb-2">
-                <img src={review.reviewerPhoto} alt={review.reviewerName} className="w-10 h-10 rounded-full border" />
-                <h4 className="font-semibold text-gray-200">{review.reviewerName}</h4>
+                <img src={review.reviewerPhoto} alt={review.reviewerName} className="w-10 h-10 rounded-full" />
+                <h4 className="font-semibold">{review.reviewerName}</h4>
               </div>
-              <p className="text-gray-300">{review.description}</p>
+              <p>{review.description}</p>
               <div className="mt-2 flex gap-1">
                 {[1, 2, 3, 4, 5].map((num) => (
                   <span key={num} className={`text-xl ${review.rating >= num ? 'text-yellow-500' : 'text-gray-300'}`}>

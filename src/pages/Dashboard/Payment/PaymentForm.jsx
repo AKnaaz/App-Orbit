@@ -6,8 +6,7 @@ import useAxiosSecure from '../../../hooks/useAxiosSecure';
 import Loading from '../../shared/Loading/Loading';
 import useAuth from '../../../hooks/useAuth';
 import Swal from 'sweetalert2';
-import cardImg from '../../../assets/card.webp';
-import paymentImg from '../../../assets/money.jpg';
+import cardImg from '../../../assets/card.jpg';
 
 const PaymentForm = () => {
   const stripe = useStripe();
@@ -114,16 +113,9 @@ const PaymentForm = () => {
   };
 
   return (
-    <div className='min-h-screen flex items-center justify-center'
-      style={{
-        backgroundImage: `url(${paymentImg})`,
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat',
-        backgroundSize: 'cover'
-      }}
-    >
+    <div className='min-h-screen flex items-center justify-center'>
       <form onSubmit={handleSubmit}
-        className='space-y-4 p-20 rounded-xl shadow-md shadow-gray-400 w-full max-w-md mx-auto'
+        className='space-y-4 p-20 rounded-xl shadow-md w-full max-w-md mx-auto'
         style={{
           backgroundImage: `url(${cardImg})`,
           backgroundPosition: 'center',
@@ -140,7 +132,7 @@ const PaymentForm = () => {
             onChange={(e) => setCouponCode(e.target.value)}
             className="input input-bordered w-full bg-gradient-to-r from-[#DFBD69] to-[#926F34] placeholder:text-gray-500"
           />
-          <span className='text-white font-semibold'>Coupon</span>
+          <span className='text-black font-semibold'>Coupon</span>
         </div>
 
         {/* Card Input */}
@@ -149,7 +141,7 @@ const PaymentForm = () => {
         {/* Payment Button */}
         <button
           type='submit'
-          className='btn bg-blue-950 w-full'
+          className='btn bg-[#FF8000] text-white w-full'
           disabled={!stripe}
         >
           Pay ${discountedAmount} {discount > 0 && `(after ${discount}% discount)`}

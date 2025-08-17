@@ -1,6 +1,6 @@
 import React from 'react';
 import useAuth from '../../../hooks/useAuth';
-import { FaCheckCircle, FaUserCircle } from 'react-icons/fa';
+import { FaCheckCircle, FaEnvelope, FaFacebook, FaInstagramSquare, FaLinkedin, FaMapMarkerAlt, FaPhoneAlt, FaTwitterSquare, FaUserCircle } from 'react-icons/fa';
 import { IoMail } from 'react-icons/io5';
 import { AiOutlineCrown } from 'react-icons/ai';
 import profileBg from '../../../assets/bridge.jpg';
@@ -49,44 +49,66 @@ const MyProfile = () => {
     return <Loading></Loading>
   };
 
+    // Dummy extra info (if user data not available)
+  const users = {
+    phone: '+880 1234-567890',
+    address: 'Chittagong, Bangladesh',
+    bio: 'You are an active platform user. Manage your profile and see your activity here.',
+  };
+
   return (
     <div
-      className="min-h-screen flex items-center justify-center bg-cover bg-center px-4"
-      style={{
-        backgroundImage: `url(${profileBg})`
-      }}
-    >
-      <div className="w-full max-w-md bg-white bg-opacity-10 backdrop-blur-md rounded-xl shadow-lg p-8 border border-white border-opacity-20 text-center"
-       style={{
-          background: 'rgba(255, 255, 255, 0.1)',
-          backdropFilter: 'blur(2px)',
-          WebkitBackdropFilter: 'blur(2px)'
-        }}
-      >
+      className="max-w-4xl mx-auto mt-16 p-8 rounded-2xl shadow-xl">
+      <div className="flex flex-col items-center text-center">
         <img
           src={user?.photoURL || 'https://i.ibb.co/Tm0zmRM/user.png'}
           alt="User"
-          className="w-24 h-24 rounded-full mx-auto border-4 border-gray-300 shadow"
+          className="w-36 h-36 rounded-full object-cover border-4 border-[#FF8000] mb-4 shadow-lg"
         />
-        <h2 className="text-xl font-bold text-white mt-4 flex items-center justify-center gap-2">
-          <FaUserCircle className="text-white text-2xl" />
-          {user?.displayName || 'Anonymous User'}
-        </h2>
-        <p className="text-white text-opacity-80 flex items-center justify-center gap-2 mt-1">
-          <IoMail className="text-white" />
-          {user?.email}
-        </p>
+        <h2 className="text-2xl font-bold mb-2">{user?.displayName || 'Anonymous User'}</h2>
+
+        {/* Bio */}
+        <p className="mb-8 px-4 md:px-0">{users.bio}</p>
+
+        {/* Info Card + Social Links */}
+                <div className="w-full flex flex-col md:flex-row justify-center items-center gap-6 mb-10">
+                  {/* Info Card */}
+                  <div className="flex-1 rounded-lg p-6 space-y-4 shadow-md hover:shadow-xl transition-shadow duration-300">
+                    <div className="flex items-center justify-center gap-3">
+                      <FaEnvelope className="text-blue-500" />
+                      <span>{user?.email}</span>
+                    </div>
+        
+                    <div className="flex items-center justify-center gap-3">
+                      <FaPhoneAlt className="text-green-500" />
+                      <span>{users.phone}</span>
+                    </div>
+        
+                    <div className="flex items-center justify-center gap-3">
+                      <FaMapMarkerAlt className="text-red-500" />
+                      <span>{users.address}</span>
+                    </div>
+                  </div>
+        
+                  {/* Social Links */}
+                  <div className="flex-1 flex justify-center gap-8 rounded-lg p-6 shadow-md hover:shadow-xl transition-shadow duration-300">
+                    <a href="https://www.facebook.com/anmoon.islam.31"><FaFacebook className='text-blue-400' size={25}/></a>
+                    <a href="https://www.instagram.com/?hl=en"><FaInstagramSquare className='text-pink-400' size={25}/></a>
+                    <a href="https://x.com/Moontahasafiq"><FaTwitterSquare className='text-black' size={25}/></a>
+                    <a href="https://www.linkedin.com/in/nazatakter-dev"><FaLinkedin className='text-blue-400' size={25}/></a>
+                  </div>
+                </div>
 
         {
           userInfo?.isSubscribed ? (
               <p className="flex justify-center items-center gap-2 mt-2">
-                <FaCheckCircle className='text-white' /> Status: 
-                <span className='text-green-300 font-bold'>Verified</span>
+                <FaCheckCircle /> Status: 
+                <span className='text-green-600 font-bold'>Verified</span>
               </p>
           ) : (
             <button
               onClick={() => handleSubscribe(user.email)}
-              className="mt-6 btn btn-wide bg-gradient-to-r from-gray-700 to-gray-500 text-white font-bold rounded-3xl"
+              className="mt-6 btn btn-wide bg-[#FF8000] text-white font-bold rounded-3xl"
             >
               <AiOutlineCrown className="text-xl mr-1" />
               Subscription price ${subscriptionPrice}

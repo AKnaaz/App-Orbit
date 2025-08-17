@@ -4,6 +4,10 @@
 @plugin "daisyui";
 
 
+@plugin "daisyui" {
+   themes: light --default, dark --prefersdark, dark;
+}
+
 .font {
   font-family: "Manufacturing Consent", system-ui;
   font-weight: 400;

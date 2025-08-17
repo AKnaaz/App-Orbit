@@ -56,6 +56,12 @@ const DashboardLayout = () => {
                     </li>
 
                     <li className='font-bold'>
+                    <NavLink to="/dashboard/user-statistics">
+                    <MdBarChart className="inline" size={20}/>
+                    User Statistics</NavLink>
+                    </li>
+
+                    <li className='font-bold'>
                         <NavLink to="/dashboard/add-product">
                         <MdAddBox className="inline" size={20}/>
                         Add Product</NavLink>
@@ -71,6 +77,19 @@ const DashboardLayout = () => {
                
                 {!roleLoading && role?.toLowerCase().trim() === 'moderator' &&
                     <>
+                    <li className='font-bold mt-5'>
+                    <NavLink to="/dashboard/moderator-profile">
+                    <CgProfile className="inline" size={20}/>
+                    My Profile</NavLink>
+                    </li>
+
+                    <li className="font-bold">
+                    <NavLink to="/dashboard/moderator-statistics">
+                        <MdBarChart className="inline" size={20} />
+                        Moderator Statistics
+                    </NavLink>
+                    </li>
+
                     <li className="font-bold">
                     <NavLink to="/dashboard/product-review-queue">
                         <MdOutlineRateReview className="inline" size={20} />
@@ -90,10 +109,10 @@ const DashboardLayout = () => {
 
                {!roleLoading && role?.toLowerCase().trim() === 'admin' &&
                 <>
-                <li className="font-bold">
+                <li className="font-bold mt-5">
                     <NavLink to="/dashboard/profile-page">
                         <CgProfile className="inline" size={20} />
-                        Profile Page
+                        My Profile
                     </NavLink>
                 </li>
 

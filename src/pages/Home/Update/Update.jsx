@@ -4,7 +4,6 @@ import { useParams, useNavigate } from 'react-router';
 import useAxiosSecure from '../../../hooks/useAxiosSecure';
 import Swal from 'sweetalert2';
 import Loading from '../../shared/Loading/Loading';
-import updateBg from '../../../assets/update.jpg';
 
 const Update = () => {
   const { id } = useParams();
@@ -70,37 +69,35 @@ const Update = () => {
 
   return (
     <div
-      className='min-h-screen flex items-center justify-center bg-cover bg-center px-4'
-      style={{ backgroundImage: `url(${updateBg})` }}  
-    >
+      className='min-h-screen flex items-center justify-center px-4'>
       <div className='p-6 rounded-xl w-full max-w-xl shadow-lg'>
-        <h2 className='text-2xl font-bold mb-4 text-center text-white'>Update Product</h2>
+        <h2 className='text-2xl font-bold mb-4 text-center'>Update Product</h2>
         <form onSubmit={handleSubmit(onSubmit)} className='space-y-4'>
 
           <div>       
-            <label className='block font-medium text-sm mb-1 text-white'>Product Name</label>
-            <input {...register("productName")} type="text" className='input input-bordered w-full text-white bg-transparent'/>
+            <label className='block font-medium text-sm mb-1'>Product Name</label>
+            <input {...register("productName")} type="text" className='input input-bordered w-full'/>
           </div>
 
           <div>
-            <label className='block font-medium text-sm mb-1 text-white'>Product Image URL</label>
-            <input {...register("productImage")} type="text" className='input input-bordered w-full text-white bg-transparent' />
+            <label className='block font-medium text-sm mb-1'>Product Image URL</label>
+            <input {...register("productImage")} type="text" className='input input-bordered w-full' />
           </div>
 
           <div>
-            <label className='block font-medium text-sm mb-1 text-white'>Description</label>
-            <textarea {...register("description")} className='textarea textarea-bordered w-full text-white bg-transparent' />
+            <label className='block font-medium text-sm mb-1'>Description</label>
+            <textarea {...register("description")} className='textarea textarea-bordered w-full' />
           </div>
 
           <div>
-            <label className='block font-medium text-sm mb-1 text-white'>External Link</label>
-            <input {...register("externalLink")} type="url" className='input input-bordered w-full text-white bg-transparent' />
+            <label className='block font-medium text-sm mb-1'>External Link</label>
+            <input {...register("externalLink")} type="url" className='input input-bordered w-full' />
           </div>
 
           <button
             type='submit'
             disabled={!isDirty}
-            className='btn bg-transparent w-full mt-4 hover:bg-blue-500'
+            className='btn bg-[#FF8000] text-white w-full mt-4'
           >
             Update Product
           </button>
