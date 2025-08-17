@@ -25,6 +25,8 @@ import UserRoute from "../routes/UserRoute";
 import AboutUs from "../pages/AboutUs/AboutUs";
 import TermsPrivacy from "../pages/TermsPrivacy/TermsPrivacy";
 import Contact from "../pages/Contact/Contact";
+import ProfilePage from "../pages/Dashboard/ProfilePage/ProfilePage";
+
 
 
 export const router = createBrowserRouter([
@@ -117,6 +119,12 @@ export const router = createBrowserRouter([
         element: <ModeratorRoute>
           <ReportedContents></ReportedContents>
         </ModeratorRoute>
+      },
+      {
+        path: "profile-page",
+        element: <AdminRoute>
+          <ProfilePage></ProfilePage>
+        </AdminRoute>
       },
       {
         path: "manage-users",

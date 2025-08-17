@@ -90,7 +90,14 @@ const DashboardLayout = () => {
 
                {!roleLoading && role?.toLowerCase().trim() === 'admin' &&
                 <>
-                 <li className="font-bold">
+                <li className="font-bold">
+                    <NavLink to="/dashboard/profile-page">
+                        <CgProfile className="inline" size={20} />
+                        Profile Page
+                    </NavLink>
+                </li>
+
+                <li className="font-bold">
                     <NavLink to="/dashboard/manage-users">
                         <MdPeopleOutline className="inline" size={20} />
                         Manage Users

@@ -63,35 +63,33 @@ const UpdateCoupon = () => {
   if (isLoading) return <Loading></Loading>;
 
   return (
-    <div className="min-h-screen bg-cover bg-center flex items-center justify-center px-4 py-10"
-    style={{ backgroundImage: `url(${img})` }}
-    >
+    <div className="min-h-screen flex items-center justify-center px-4 py-10">
       <div className='w-full max-w-3xl p-8 rounded-2xl shadow-2xl'>
         <h2 className="text-2xl font-bold mb-6 text-center">Update Coupon</h2>
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
           <input
             {...register('code', { required: true })}
             placeholder="Coupon Code"
-            className="input input-bordered w-full bg-transparent"
+            className="input input-bordered w-full"
           />
           <input
             type="date"
             {...register('expiry', { required: true })}
-            className="input input-bordered w-full bg-transparent"
+            className="input input-bordered w-full"
           />
           <textarea
             {...register('description')}
             placeholder="Description"
-            className="textarea textarea-bordered w-full bg-transparent"
+            className="textarea textarea-bordered w-full"
           />
           <input
             type="number"
             {...register('discount', { required: true })}
             placeholder="Discount Amount"
-            className="input input-bordered w-full bg-transparent"
+            className="input input-bordered w-full"
             step="0.01"
           />
-          <button type="submit" className="btn bg-gradient-to-l from-gray-700 to-gray-500 rounded-3xl text-white w-full">
+          <button type="submit" className="btn bg-[#FF8000] rounded-3xl text-white w-full">
             Update Coupon
           </button>
         </form>
