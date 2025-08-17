@@ -43,12 +43,8 @@ const developers = [
 
 const TopDevelopers = () => {
   return (
-    <div className="py-24 px-4 md:px-10 lg:px-20 text-white text-center"
-      style={{
-        background: "linear-gradient(90deg, #0B1120 0%, #1E1B4B 40%, #3B0764 70%, #7C3AED 100%)"
-      }}
-    >
-      <h2 className="text-3xl font-bold text-purple-700 my-10">Top Developers</h2>
+    <div className="py-12 px-4 md:px-16 text-center">
+      <h2 className="text-3xl font-bold mb-16">Top Developers</h2>
 
       <Carousel
         showThumbs={false}
@@ -68,14 +64,14 @@ const TopDevelopers = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <div className="max-w-sm mx-auto bg-gradient-to-r from-pink-600 to-purple-700 rounded-lg shadow-2xl p-6 flex flex-col items-center space-y-3">
+            <div className="max-w-sm mx-auto bg-gradient-to-b from-[#FF8000] to-[#ffb266] rounded-lg shadow-2xl p-6 flex flex-col items-center space-y-3">
               <img
                 src={dev.image}
                 alt={dev.name}
-                className="w-[320px] h-[320px] rounded-full object-cover border-4 border-blue-950"
+                className="w-[320px] h-[320px] rounded-full object-cover"
               />
-              <h3 className="text-xl font-semibold">{dev.name}</h3>
-              <p className="text-sm text-gray-400">{dev.title}</p>
+              <h3 className="text-xl font-semibold text-black">{dev.name}</h3>
+              <p className="text-sm text-black">{dev.title}</p>
             </div>
           </motion.div>
         ))}
