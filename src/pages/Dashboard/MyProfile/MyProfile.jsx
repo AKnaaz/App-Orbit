@@ -10,7 +10,6 @@ import Loading from '../../shared/Loading/Loading';
 
 const MyProfile = () => {
   const { user } = useAuth();
-  console.log("come bhai",user)
   const axiosSecure = useAxiosSecure();
   const navigate = useNavigate();
   const subscriptionPrice = 9.99;
